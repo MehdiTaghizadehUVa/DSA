@@ -3,361 +3,730 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Professional 8-Week DSA Plan (Interactive, Free)</title>
-<meta name="description" content="A curated, interactive 8-week Data Structures & Algorithms roadmap using only free videos and practice sites. Includes progress tracking and filters."/>
+<title>8-Week DSA Mastery Plan — Interactive</title>
+<link rel="icon" href="data:," />
 <style>
   :root{
-    --bg:#0b0d11; --panel:#121720; --raised:#161d27; --text:#e9eef7; --muted:#96a7bd; --border:#263041;
-    --accent:#5fb0ff; --accent2:#71e49c; --warn:#f9b24e; --danger:#ff8a9c; --tag:#1a2230;
-  }
-  @media (prefers-color-scheme: light){
-    :root{ --bg:#f6f9fc; --panel:#ffffff; --raised:#f9fbfe; --text:#0c1116; --muted:#4f6177; --border:#e6edf5; --accent:#0a69c7; --accent2:#147a3e; --warn:#b66a00; --danger:#b00020; --tag:#eef5ff }
+    --bg: #0b0f14;
+    --panel:#0f1620;
+    --muted:#94a3b8;
+    --text:#e6edf3;
+    --brand:#5eead4;
+    --brand-2:#60a5fa;
+    --ok:#22c55e;
+    --warn:#f59e0b;
+    --danger:#ef4444;
+    --card: #111827;
+    --chip:#1f2937;
+    --accent:#334155;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue","Noto Sans"}
-  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-  .wrap{max-width:1100px;margin:auto;padding:24px}
-  header{display:grid;gap:10px;margin-bottom:12px}
-  h1{margin:0;font-size:clamp(22px,3.2vw,34px)}
-  .sub{color:var(--muted)}
-  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px}
-  .controls>*{border:1px solid var(--border);background:var(--panel);border-radius:10px;padding:10px 12px}
-  .btn{cursor:pointer}
-  .btn:hover{border-color:var(--accent)}
-  .danger{color:var(--danger)}
-  .grid{display:grid;gap:14px}
-  @media(min-width:860px){ .grid{grid-template-columns:1fr 1fr} }
-  details.week{border:1px solid var(--border);border-radius:14px;background:var(--panel);overflow:hidden}
-  details[open] .summary{border-bottom:1px solid var(--border)}
-  .summary{list-style:none;padding:14px 16px;display:flex;gap:10px;align-items:center;cursor:pointer}
-  .summary h2{margin:0;font-size:18px}
-  .meta{margin-left:auto;display:flex;gap:8px;color:var(--muted);align-items:center}
-  .badge{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--tag);border:1px solid var(--border)}
-  .list{padding:10px 14px 16px;display:grid;gap:10px}
-  .item{display:grid;gap:6px;border:1px dashed var(--border);border-radius:12px;padding:10px 12px;background:var(--raised)}
-  .row{display:flex;gap:10px;align-items:center}
-  .type{font-size:12px;padding:2px 8px;border-radius:8px;border:1px solid var(--border);background:var(--tag)}
-  .type.video{color:var(--accent)}
-  .type.practice{color:var(--accent2)}
-  .type.ref{color:var(--warn)}
-  .title{font-weight:600}
-  .muted{color:var(--muted)}
-  .strike{opacity:.55;text-decoration:line-through}
-  .note{font-size:13px;color:var(--muted)}
-  .footer{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-  .k{background:var(--tag);border:1px solid var(--border);padding:2px 6px;border-radius:6px}
-  .toggle{display:flex;gap:8px;align-items:center}
-  .pill{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--border);border-radius:999px;padding:4px 10px;background:var(--raised)}
+  html,body{height:100%}
+  body{
+    margin:0;background:linear-gradient(180deg,#0b0f14, #0b0f14 60%, #0b0f14);
+    color:var(--text);font:500 16px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
+  }
+  a{color:var(--brand-2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .app{
+    display:grid;grid-template-columns:320px 1fr;gap:18px;
+    height:100%;padding:18px;max-width:1400px;margin:0 auto;
+  }
+  .sidebar{
+    background:var(--panel);border:1px solid #1f2937;border-radius:16px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .main{
+    background:var(--panel);border:1px solid #1f2937;border-radius:16px;box-shadow:var(--shadow);
+    overflow:auto;position:relative;
+  }
+  header{
+    padding:16px 18px;border-bottom:1px solid #1f2937;display:flex;gap:12px;align-items:center;justify-content:space-between
+  }
+  header h1{font-size:18px;margin:0}
+  .badge{font-size:12px;background:var(--chip);color:#cbd5e1;border:1px solid #273445; padding:4px 8px;border-radius:999px}
+  .week-list{padding:10px;overflow:auto}
+  .week{
+    border:1px solid #1f2937;background:var(--card);border-radius:12px;padding:12px;margin:10px 8px;cursor:pointer;
+    transition:transform .08s ease, border-color .2s ease;
+  }
+  .week:hover{transform:translateY(-1px);border-color:#2b3a4f}
+  .week.active{outline:2px solid var(--brand-2);border-color:var(--brand-2)}
+  .week h3{margin:0 0 4px 0;font-size:15px}
+  .week .meta{font-size:12px;color:var(--muted)}
+  .controls{
+    display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid #1f2937
+  }
+  .controls input, .controls select{
+    background:#0b1220;border:1px solid #223047;color:var(--text);border-radius:10px;padding:10px 12px;outline:none
+  }
+  .controls button{
+    background:linear-gradient(135deg,var(--brand-2),#22c55e);
+    color:#061016;border:0;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer
+  }
+  .controls .ghost{
+    background:#0b1220;color:#cbd5e1;border:1px solid #263347
+  }
+  .content{
+    padding:22px 26px 80px 26px;
+  }
+  .section-title{margin:8px 0 16px 0;font-size:22px}
+  .step{
+    border:1px solid #1f2937;background:var(--card);border-radius:14px;padding:14px 14px;margin:12px 0;
+  }
+  .step-head{
+    display:flex;align-items:center;gap:12px;cursor:pointer
+  }
+  .step-head h4{margin:0;font-size:16px}
+  .chip{background:var(--chip);border:1px solid #2a3647;color:#cbd5e1;border-radius:999px;padding:2px 8px;font-size:12px}
+  .grow{flex:1}
+  .donebox{display:flex;align-items:center;gap:8px}
+  .donebox input{width:18px;height:18px}
+  .step-body{display:none;margin-top:12px}
+  .links{display:grid;grid-template-columns:1fr;gap:8px}
+  .links a{display:flex;align-items:center;gap:10px;border:1px solid #263347;padding:10px;border-radius:10px;background:#0b1220}
+  .links small{color:#94a3b8}
+  .kicker{font-size:13px;color:#a3b1c6}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .callout{
+    border:1px dashed #2b3a4f;border-radius:12px;background:rgba(96,165,250,.05);padding:12px
+  }
+  .sticky-footer{
+    position:sticky;bottom:0;left:0;right:0;border-top:1px solid #1f2937;background:linear-gradient(180deg,rgba(11,15,20,.7),#0b0f14);
+    padding:10px 18px;display:flex;gap:10px;align-items:center;justify-content:space-between
+  }
+  .progress{
+    height:10px;background:#0b1220;border:1px solid #233148;border-radius:999px;overflow:hidden;flex:1
+  }
+  .bar{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-2));width:0%}
+  .srch{display:flex;gap:8px;align-items:center}
+  .tag{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid #2a3647;background:#0b1220;color:#cbd5e1}
+  .hide{display:none}
+  @media (max-width: 980px){ .app{grid-template-columns:1fr}.sidebar{order:2} }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>Professional 8-Week DSA Roadmap (Free)</h1>
-    <div class="sub">Balanced mix of university-grade theory, pattern practice, visual intuition, and graded problemsets. Your progress is saved locally in this browser.</div>
-    <div class="controls" role="region" aria-label="Filters and actions">
-      <input id="search" type="search" placeholder="Search topics (e.g., dijkstra, dp, two pointers)" />
-      <label class="toggle"><input id="flt-video" type="checkbox" checked/> Videos</label>
-      <label class="toggle"><input id="flt-practice" type="checkbox" checked/> Practice</label>
-      <label class="toggle"><input id="flt-ref" type="checkbox" checked/> References</label>
-      <label class="toggle"><input id="show-depth" type="checkbox"/> Show Depth items</label>
-      <span class="pill" title="Study cadence">⏱️ <strong>90–120 min/day</strong>, 5 days/week</span>
-      <button class="btn" id="expand-all">Expand all</button>
-      <button class="btn" id="collapse-all">Collapse all</button>
-      <button class="btn" id="next">Open next ▶</button>
-      <button class="btn" id="export">Export</button>
-      <button class="btn" id="import">Import</button>
-      <button class="btn danger" id="reset">Reset</button>
+<div class="app" id="app">
+  <aside class="sidebar">
+    <header>
+      <h1>DSA Plan</h1>
+      <span class="badge">8 weeks</span>
+    </header>
+    <div class="controls">
+      <input id="search" placeholder="Search by topic/problem…" />
+      <select id="filter">
+        <option value="all">All</option>
+        <option value="arrays">Arrays/Hashing</option>
+        <option value="twopointers">Two Pointers</option>
+        <option value="binarysearch">Binary Search</option>
+        <option value="stackqueue">Stack/Queue</option>
+        <option value="prefix">Prefix/Sliding</option>
+        <option value="trees">Trees/BST</option>
+        <option value="heap">Heap/PQ</option>
+        <option value="sorting">Sorting</option>
+        <option value="graphs">Graphs</option>
+        <option value="shortest">Shortest Paths</option>
+        <option value="mst">MST/Union-Find</option>
+        <option value="dp">Dynamic Programming</option>
+        <option value="trie">Trie</option>
+        <option value="advanced">Advanced</option>
+      </select>
+      <button class="ghost" id="expandAll">Expand all</button>
+      <button class="ghost" id="collapseAll">Collapse all</button>
     </div>
-    <div class="note">Order rationale: each week layers a **few core patterns**, then immediately **consolidates with practice** and **visuals**. “Depth” items are optional stretch goals or advanced proofs.</div>
-  </header>
+    <div class="week-list" id="weekList"></div>
+    <div class="sticky-footer">
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <button id="exportBtn" class="ghost">Export</button>
+      <button id="importBtn" class="ghost">Import</button>
+      <input type="file" id="importFile" class="hide" accept="application/json" />
+      <button id="resetBtn" style="background:#1f2937;color:#e2e8f0;border:1px solid #334155;border-radius:10px;padding:8px 10px">Reset</button>
+    </div>
+  </aside>
 
-  <div id="weeks" class="grid" aria-live="polite"></div>
+  <main class="main">
+    <header>
+      <div>
+        <div style="font-weight:800">Professional 8-Week Roadmap</div>
+        <div class="kicker">Click a week → expand any step → watch the video(s) → practice the exact problems.</div>
+      </div>
+      <div class="badge">Progress <span id="pct">0%</span></div>
+    </header>
+    <div class="content">
+      <div class="callout">
+        <strong>How to use:</strong> Aim ~90–120 minutes/day, 6 days/week. For each step: <em>watch → outline solution → code from scratch → practice</em>. Do spaced review on Day 6. Day 7 optional rest or contest.
+      </div>
 
-  <section class="note" style="margin-top:18px">
-    <strong>How to study</strong> — Day 1: 1–2 short lectures → Day 2–3: 4–6 problems in the week’s pattern → Day 4: one harder set → Day 5: 60–75 min timed set. Keep a running notebook: idea → invariant/state → complexity → pitfalls.
-  </section>
+      <h2 class="section-title" id="weekTitle">Select a week on the left</h2>
+      <div id="steps"></div>
 
-  <div class="footer">
-    <span class="note">Tip: <span class="k">Ctrl/⌘+K</span> focuses search. Your progress lives in <span class="k">localStorage</span>.</span>
-  </div>
+      <div style="margin-top:24px" class="callout grid-2">
+        <div>
+          <div style="font-weight:700;margin-bottom:6px">Daily routine (suggested)</div>
+          <ul style="margin:6px 0 0 18px;color:#cbd5e1">
+            <li>10m: Review notes from yesterday</li>
+            <li>30–45m: Watch the linked video(s)</li>
+            <li>40–60m: Implement twice (from scratch, then from memory)</li>
+            <li>30–45m: Do the linked practice set, then 1 similar variant</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;margin-bottom:6px">Tips</div>
+          <ul style="margin:6px 0 0 18px;color:#cbd5e1">
+            <li>Focus on <em>patterns</em> (sliding window, two pointers, BFS/DFS, DP states).</li>
+            <li>Time yourself. Add a brief post-mortem for any misses.</li>
+            <li>Re-do difficult problems after 24h / 7d / 30d.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>
 
 <script>
-/* ---------- Curated resources (all free to view / audit) ---------- */
-const R = {
-  // UNIVERSITY-LEVEL THEORY
-  mit6006: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",         // OCW page
-  mit6006YT: "https://www.youtube.com/playlist?list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY",        // full lectures
-  mit6046: "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/",
-  mit6046YT: "https://www.youtube.com/playlist?list=PLUl4u3cNGP6317WaSNfmCvGym2ucw3oGp",
-
-  princetonAlgI: "https://www.coursera.org/learn/algorithms-part1", // audit free
-  princetonInfo: "https://online.princeton.edu/algorithms-part-i",
-
-  // PRACTICAL PATTERNS & WALK-THROUGHS
-  neetcode: "https://www.youtube.com/c/neetcode",
-  spPatterns: "https://seanprashad.com/leetcode-patterns/",
-  // VISUALIZATION
-  visualgo: "https://visualgo.net/",
-  visSort: "https://visualgo.net/en/sorting",
-  visList: "https://visualgo.net/en/list",
-  visBST: "https://visualgo.net/en/bst",
-  visGraph: "https://visualgo.net/en/graphds",
-  visDFS: "https://visualgo.net/en/dfsbfs",
-
-  // PROBLEMSETS / IDE
-  cses: "https://cses.fi/problemset/",
-  usacoguide: "https://usaco.guide/",
-  usacoProblems: "https://usaco.guide/problems/",
-  usacoIDE: "https://ide.usaco.guide/",
-
-  // REFERENCE (DERIVATIONS / PSEUDOCODE)
-  cpalgo: "https://cp-algorithms.com/index.html",
-
-  // LeetCode helper
-  LC: (slug) => `https://leetcode.com/problems/${slug}/`
-};
-
-/* ---------- The plan ---------- */
-/* type: "video" | "practice" | "ref"
-   depth: optional stretch item (hidden unless toggled)
-*/
+/** ------------------------------
+ * Data: 8-Week Professional Plan
+ * Each step includes exact video links (no playlists) and direct practice links.
+ * ------------------------------ */
 const PLAN = [
   {
-    week: 0, title: "Onboarding (Optional) — Python refresh, Big-O orientation, tooling",
-    items: [
-      {type:"video", title:"MIT 6.006 — course overview & asymptotics (audit free)", url:R.mit6006, tags:["big-o","asymptotics","theory"]},
-      {type:"video", title:"freeCodeCamp — DS&A in Python (sections you need)", url:"https://www.freecodecamp.org/news/learn-algorithms-and-data-structures-in-python/", tags:["python","overview"]},
-      {type:"ref",   title:"VisuAlgo — quick tour (sorting, lists, BST, BFS/DFS)", url:R.visualgo, tags:["visual"]},
-      {type:"ref",   title:"USACO Guide — how to run code online", url:"https://usaco.guide/general/running-code-online", tags:["ide"]},
+    id:"w1",
+    title:"Week 1 — Foundations & Arrays/Hashing Core",
+    focus:["arrays","prefix"],
+    days:"Mon–Sat study, Sun optional",
+    steps:[
+      {
+        id:"w1s1",
+        tag:"Foundations",
+        title:"Asymptotic analysis: Big-O (time & space), common growth rates",
+        videos:[
+          {t:"Big-O for Coding Interviews — NeetCode (exact video)", u:"https://www.youtube.com/watch?v=BgLTDT03QtU"},
+          {t:"Intro to Big-O & Time Complexity — CS Dojo", u:"https://www.youtube.com/watch?v=D6xkbGLQesk"}
+        ],
+        practice:[
+          {t:"Cheatsheet (free)", u:"https://neetcode.io/courses/lessons/big-o-notation"}
+        ]
+      },
+      {
+        id:"w1s2",
+        tag:"Arrays/Hashing",
+        title:"Two Sum, Valid Anagram, Group Anagrams",
+        videos:[
+          {t:"Two Sum — LeetCode 1 (NeetCode)", u:"https://www.youtube.com/watch?v=KLlXCFG5TnA"},
+          {t:"Valid Anagram — LeetCode 242 (NeetCode)", u:"https://www.youtube.com/watch?v=9UtInBqnCgA"},
+          {t:"Group Anagrams — LeetCode 49 (NeetCode)", u:"https://www.youtube.com/watch?v=vzdNOK2oB2E"}
+        ],
+        practice:[
+          {t:"LeetCode 1. Two Sum", u:"https://leetcode.com/problems/two-sum/"},
+          {t:"LeetCode 242. Valid Anagram", u:"https://leetcode.com/problems/valid-anagram/"},
+          {t:"LeetCode 49. Group Anagrams", u:"https://leetcode.com/problems/group-anagrams/"}
+        ]
+      },
+      {
+        id:"w1s3",
+        tag:"Arrays/Hashing",
+        title:"Top-K & frequency maps; prefix tricks",
+        videos:[
+          {t:"Top K Frequent Elements — LeetCode 347 (NeetCode)", u:"https://www.youtube.com/watch?v=YPTqKIgVk-k"},
+          {t:"Product of Array Except Self — LeetCode 238 (NeetCode)", u:"https://www.youtube.com/watch?v=bNvIQI2wAjk"}
+        ],
+        practice:[
+          {t:"LeetCode 347. Top K Frequent Elements", u:"https://leetcode.com/problems/top-k-frequent-elements/"},
+          {t:"LeetCode 238. Product of Array Except Self", u:"https://leetcode.com/problems/product-of-array-except-self/"}
+        ]
+      },
+      {
+        id:"w1s4",
+        tag:"Strings/Hashing",
+        title:"Encode/Decode strings; sliding window warmup",
+        videos:[
+          {t:"Encode & Decode Strings — LeetCode 271 (NeetCode)", u:"https://www.youtube.com/watch?v=B1k_sxOSgv8"},
+          {t:"Longest Substring Without Repeating — LeetCode 3 (NeetCode)", u:"https://www.youtube.com/watch?v=wiGpQwVHdE0"}
+        ],
+        practice:[
+          {t:"LeetCode 271. Encode and Decode Strings", u:"https://leetcode.com/problems/encode-and-decode-strings/"},
+          {t:"LeetCode 3. Longest Substring Without Repeating", u:"https://leetcode.com/problems/longest-substring-without-repeating-characters/"}
+        ]
+      }
     ]
   },
   {
-    week: 1, title: "Arrays, Strings, Hashing · Two-Pointers · Sliding Window",
-    items: [
-      {type:"video", title:"NeetCode — Arrays/Hashing patterns (YouTube channel)", url:R.neetcode, tags:["patterns","practice-first"]},
-      {type:"ref",   title:"VisuAlgo — arrays / list ops / stable sorts", url:R.visSort, tags:["visual"]},
-      {type:"practice", title:"Two Sum", url:R.LC("two-sum"), tags:["hashmap","easy"]},
-      {type:"practice", title:"Valid Anagram", url:R.LC("valid-anagram"), tags:["hash","easy"]},
-      {type:"practice", title:"Group Anagrams", url:R.LC("group-anagrams"), tags:["hash","medium"]},
-      {type:"practice", title:"3Sum", url:R.LC("3sum"), tags:["two-pointers","medium"]},
-      {type:"practice", title:"Container With Most Water", url:R.LC("container-with-most-water"), tags:["two-pointers","medium"]},
-      {type:"practice", title:"Longest Substring Without Repeating", url:R.LC("longest-substring-without-repeating-characters"), tags:["sliding window","medium"]},
-      {type:"practice", title:"Minimum Window Substring (capstone)", url:R.LC("minimum-window-substring"), tags:["sliding window","hard"]},
-      {type:"ref", depth:true, title:"CP-Algorithms — two-pointers technique", url:"https://cp-algorithms.com/two_pointers/section.html", tags:["reference"]}
+    id:"w2",
+    title:"Week 2 — Two Pointers, Sliding Window, Binary Search",
+    focus:["twopointers","binarysearch","prefix"],
+    days:"Mon–Sat study, Sun optional",
+    steps:[
+      {
+        id:"w2s1",
+        tag:"Two Pointers",
+        title:"3Sum, Container With Most Water, Trapping Rain Water",
+        videos:[
+          {t:"3Sum — LeetCode 15 (NeetCode)", u:"https://www.youtube.com/watch?v=jzZsG8n2R9A"},
+          {t:"Container With Most Water — LeetCode 11 (NeetCode)", u:"https://www.youtube.com/watch?v=UuiTKBwPgAo"},
+          {t:"Trapping Rain Water — LeetCode 42 (NeetCode)", u:"https://www.youtube.com/watch?v=ZI2z5pq0TqA"}
+        ],
+        practice:[
+          {t:"LeetCode 15. 3Sum", u:"https://leetcode.com/problems/3sum/"},
+          {t:"LeetCode 11. Container With Most Water", u:"https://leetcode.com/problems/container-with-most-water/"},
+          {t:"LeetCode 42. Trapping Rain Water", u:"https://leetcode.com/problems/trapping-rain-water/"}
+        ]
+      },
+      {
+        id:"w2s2",
+        tag:"Sliding Window",
+        title:"Minimum Window Substring & variants",
+        videos:[
+          {t:"Minimum Window Substring — LeetCode 76 (NeetCode)", u:"https://www.youtube.com/watch?v=jSto0O4AJbM"}
+        ],
+        practice:[
+          {t:"LeetCode 76. Minimum Window Substring", u:"https://leetcode.com/problems/minimum-window-substring/"},
+          {t:"LeetCode 567. Permutation in String", u:"https://leetcode.com/problems/permutation-in-string/"},
+          {t:"LeetCode 424. Longest Repeating Character Replacement", u:"https://leetcode.com/problems/longest-repeating-character-replacement/"}
+        ]
+      },
+      {
+        id:"w2s3",
+        tag:"Binary Search",
+        title:"Search patterns & answer-space search",
+        videos:[
+          {t:"Binary Search in 4 minutes", u:"https://www.youtube.com/watch?v=xqDmZmmHF5E"},
+          {t:"Search in Rotated Sorted Array — LeetCode 33 (NeetCode)", u:"https://www.youtube.com/watch?v=U8XENwh8Oy8"},
+          {t:"Koko Eating Bananas — LeetCode 875 (NeetCode)", u:"https://www.youtube.com/watch?v=U2SozAs9RzA"}
+        ],
+        practice:[
+          {t:"LeetCode 33. Search in Rotated Sorted Array", u:"https://leetcode.com/problems/search-in-rotated-sorted-array/"},
+          {t:"LeetCode 875. Koko Eating Bananas", u:"https://leetcode.com/problems/koko-eating-bananas/"},
+          {t:"LeetCode 74. Search a 2D Matrix", u:"https://leetcode.com/problems/search-a-2d-matrix/"}
+        ]
+      }
     ]
   },
   {
-    week: 2, title: "Stacks & Queues · Monotonic Structures · Linked Lists · Prefix Sums",
-    items: [
-      {type:"video", title:"William Fiset — Data Structures playlist (stack/queue/monotonic)", url:"https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu", tags:["theory","impl"]},
-      {type:"ref",   title:"VisuAlgo — lists / stack / queue", url:R.visList, tags:["visual"]},
-      {type:"practice", title:"Valid Parentheses", url:R.LC("valid-parentheses"), tags:["stack","easy"]},
-      {type:"practice", title:"Min Stack", url:R.LC("min-stack"), tags:["stack","medium"]},
-      {type:"practice", title:"Daily Temperatures (monotonic)", url:R.LC("daily-temperatures"), tags:["monotonic","medium"]},
-      {type:"practice", title:"Reverse Linked List", url:R.LC("reverse-linked-list"), tags:["linked list","easy"]},
-      {type:"practice", title:"Merge Two Sorted Lists", url:R.LC("merge-two-sorted-lists"), tags:["linked list","easy"]},
-      {type:"practice", title:"Linked List Cycle (Floyd)", url:R.LC("linked-list-cycle"), tags:["two pointers","easy"]},
-      {type:"practice", title:"Reorder List", url:R.LC("reorder-list"), tags:["linked list","medium"]},
-      {type:"practice", title:"Subarray Sum Equals K", url:R.LC("subarray-sum-equals-k"), tags:["prefix sum","medium"]}
+    id:"w3",
+    title:"Week 3 — Stack/Queue, Prefix Sums & Monotonic Stack",
+    focus:["stackqueue","prefix"],
+    days:"Mon–Sat study, Sun optional",
+    steps:[
+      {
+        id:"w3s1",
+        tag:"Stack",
+        title:"Valid Parentheses + Min Stack",
+        videos:[
+          {t:"Valid Parentheses — LeetCode 20 (NeetCode)", u:"https://www.youtube.com/watch?v=WTzjTskDFMg"},
+          {t:"Min Stack — LeetCode 155 (video)", u:"https://www.youtube.com/watch?v=EhCiNho80HI"}
+        ],
+        practice:[
+          {t:"LeetCode 20. Valid Parentheses", u:"https://leetcode.com/problems/valid-parentheses/"},
+          {t:"LeetCode 155. Min Stack", u:"https://leetcode.com/problems/min-stack/"}
+        ]
+      },
+      {
+        id:"w3s2",
+        tag:"Queue/Stack",
+        title:"Implement Queue using Stacks; Implement Stack using Queues",
+        videos:[
+          {t:"Implement Queue using Stacks — LeetCode 232 (video)", u:"https://www.youtube.com/watch?v=FEark4VZP5U"}
+        ],
+        practice:[
+          {t:"LeetCode 232. Implement Queue using Stacks", u:"https://leetcode.com/problems/implement-queue-using-stacks/"},
+          {t:"LeetCode 225. Implement Stack using Queues", u:"https://leetcode.com/problems/implement-stack-using-queues/"}
+        ]
+      },
+      {
+        id:"w3s3",
+        tag:"Monotonic/Prefix",
+        title:"Daily Temperatures; Subarray Sum Equals K",
+        videos:[
+          {t:"Daily Temperatures — LeetCode 739 (NeetCode)", u:"https://www.youtube.com/watch?v=cTBiBSnjO3c"},
+          {t:"Subarray Sum Equals K — LeetCode 560 (NeetCode)", u:"https://www.youtube.com/watch?v=fFVZt-6sgyo"}
+        ],
+        practice:[
+          {t:"LeetCode 739. Daily Temperatures", u:"https://leetcode.com/problems/daily-temperatures/"},
+          {t:"LeetCode 560. Subarray Sum Equals K", u:"https://leetcode.com/problems/subarray-sum-equals-k/"}
+        ]
+      }
     ]
   },
   {
-    week: 3, title: "Sorting (Merge/Quick/Heap) · Binary Search · Divide & Conquer",
-    items: [
-      {type:"video", title:"Princeton Algorithms Part I — sorting/searching (audit free)", url:R.princetonAlgI, tags:["theory","audit"]},
-      {type:"video", title:"Binary Search patterns — NeetCode", url:R.neetcode, tags:["patterns"]},
-      {type:"practice", title:"Merge Intervals", url:R.LC("merge-intervals"), tags:["sorting","intervals","medium"]},
-      {type:"practice", title:"Non-overlapping Intervals", url:R.LC("non-overlapping-intervals"), tags:["greedy","medium"]},
-      {type:"practice", title:"Search in Rotated Sorted Array", url:R.LC("search-in-rotated-sorted-array"), tags:["binary search","medium"]},
-      {type:"practice", title:"Koko Eating Bananas (binary search on answer)", url:R.LC("koko-eating-bananas"), tags:["binary search","medium"]},
-      {type:"practice", title:"Median of Two Sorted Arrays (capstone)", url:R.LC("median-of-two-sorted-arrays"), tags:["binary search","hard"]},
-      {type:"ref", depth:true, title:"CP-Algorithms — binary exponentiation (D&C idea)", url:"https://cp-algorithms.com/algebra/binary-exp.html", tags:["reference"]}
+    id:"w4",
+    title:"Week 4 — Trees & BST",
+    focus:["trees"],
+    days:"Mon–Sat study, Sun optional",
+    steps:[
+      {
+        id:"w4s1",
+        tag:"Trees",
+        title:"Traversal patterns (BFS/DFS) & level order",
+        videos:[
+          {t:"Binary Tree Level Order Traversal — LeetCode 102 (NeetCode)", u:"https://www.youtube.com/watch?v=6ZnyEApgFYg"}
+        ],
+        practice:[
+          {t:"LeetCode 102. Binary Tree Level Order Traversal", u:"https://leetcode.com/problems/binary-tree-level-order-traversal/"},
+          {t:"LeetCode 104. Maximum Depth of Binary Tree", u:"https://leetcode.com/problems/maximum-depth-of-binary-tree/"}
+        ]
+      },
+      {
+        id:"w4s2",
+        tag:"BST",
+        title:"Validate BST; Kth Smallest in BST",
+        videos:[
+          {t:"Validate Binary Search Tree — LeetCode 98 (NeetCode)", u:"https://www.youtube.com/watch?v=s6ATEkipzow"},
+          {t:"Kth Smallest in a BST — LeetCode 230 (NeetCode)", u:"https://www.youtube.com/watch?v=5LUXSvjmGCw"}
+        ],
+        practice:[
+          {t:"LeetCode 98. Validate BST", u:"https://leetcode.com/problems/validate-binary-search-tree/"},
+          {t:"LeetCode 230. Kth Smallest in BST", u:"https://leetcode.com/problems/kth-smallest-element-in-a-bst/"}
+        ]
+      },
+      {
+        id:"w4s3",
+        tag:"BST",
+        title:"Lowest Common Ancestor (BST) & basics",
+        videos:[
+          {t:"LCA of a BST — LeetCode 235 (NeetCode)", u:"https://www.youtube.com/watch?v=gs2LMfuOR9k"}
+        ],
+        practice:[
+          {t:"LeetCode 235. LCA of a BST", u:"https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"},
+          {t:"LeetCode 700. Search in a BST", u:"https://leetcode.com/problems/search-in-a-binary-search-tree/"}
+        ]
+      }
     ]
   },
   {
-    week: 4, title: "Trees · BST · Priority Queues (Heaps)",
-    items: [
-      {type:"video", title:"MIT 6.006 — BSTs/Heaps lectures (audit free)", url:R.mit6006YT, tags:["theory"]},
-      {type:"ref",   title:"VisuAlgo — BST • rotations • traversal", url:R.visBST, tags:["visual"]},
-      {type:"video", title:"William Fiset — Heaps / priority queues", url:"https://www.youtube.com/playlist?list=PLDV1Zeh2NRsCLFSHm1nYb9daYf60lCcag", tags:["impl"]},
-      {type:"practice", title:"Binary Tree Inorder / Preorder / Postorder", url:R.LC("binary-tree-inorder-traversal"), tags:["dfs","easy"]},
-      {type:"practice", title:"Level Order Traversal", url:R.LC("binary-tree-level-order-traversal"), tags:["bfs","medium"]},
-      {type:"practice", title:"Validate BST", url:R.LC("validate-binary-search-tree"), tags:["bst","medium"]},
-      {type:"practice", title:"Kth Smallest in BST", url:R.LC("kth-smallest-element-in-a-bst"), tags:["bst","medium"]},
-      {type:"practice", title:"Kth Largest in Array (heap)", url:R.LC("kth-largest-element-in-an-array"), tags:["heap","medium"]},
-      {type:"practice", title:"Top-K Frequent Elements (heap)", url:R.LC("top-k-frequent-elements"), tags:["heap","medium"]}
+    id:"w5",
+    title:"Week 5 — Heaps / Priority Queues & Sorting",
+    focus:["heap","sorting"],
+    days:"Mon–Sat study, Sun optional",
+    steps:[
+      {
+        id:"w5s1",
+        tag:"Heap / PQ",
+        title:"Priority Queue & Binary Heap (concepts) + Top-K problems",
+        videos:[
+          {t:"Priority Queue — Intro (William Fiset)", u:"https://www.youtube.com/watch?v=D6gu-_tmEpQ"},
+          {t:"Binary Heap (Fiset)", u:"https://www.youtube.com/watch?v=Q_eia3jC9Ts"},
+          {t:"Top K Frequent Elements — LeetCode 347 (NeetCode)", u:"https://www.youtube.com/watch?v=YPTqKIgVk-k"},
+          {t:"Kth Largest Element — LeetCode 215 (NeetCode)", u:"https://www.youtube.com/watch?v=XEmy13g1Qxc"}
+        ],
+        practice:[
+          {t:"LeetCode 347. Top K Frequent Elements", u:"https://leetcode.com/problems/top-k-frequent-elements/"},
+          {t:"LeetCode 215. Kth Largest Element in an Array", u:"https://leetcode.com/problems/kth-largest-element-in-an-array/"}
+        ]
+      },
+      {
+        id:"w5s2",
+        tag:"Sorting",
+        title:"Divide & Conquer sorting — Merge Sort and QuickSort (deep dive)",
+        videos:[
+          {t:"Merge Sort — Abdul Bari (exact video)", u:"https://www.youtube.com/watch?v=mB5HXBb_HY8"},
+          {t:"QuickSort — Abdul Bari (exact video)", u:"https://www.youtube.com/watch?v=7h1s2SojIRw"}
+        ],
+        practice:[
+          {t:"Practice: implement mergesort/quicksort", u:"https://gist.github.com/"}
+        ]
+      }
     ]
   },
   {
-    week: 5, title: "Graphs I — Representation, BFS/DFS, Toposort, Bipartite, DSU",
-    items: [
-      {type:"video", title:"William Fiset — Graph Theory playlist", url:"https://www.youtube.com/playlist?list=PLDV1Zeh2NRsDGO4--qE8yH72HFL1Km93P", tags:["theory"]},
-      {type:"ref",   title:"VisuAlgo — Graph DS • BFS/DFS", url:R.visDFS, tags:["visual"]},
-      {type:"practice", title:"Number of Islands", url:R.LC("number-of-islands"), tags:["grid","bfs/dfs","medium"]},
-      {type:"practice", title:"Clone Graph", url:R.LC("clone-graph"), tags:["graph","bfs/dfs","medium"]},
-      {type:"practice", title:"Course Schedule I/II (toposort)", url:R.LC("course-schedule"), tags:["dag","toposort","medium"]},
-      {type:"practice", title:"Is Graph Bipartite?", url:R.LC("is-graph-bipartite"), tags:["bipartite","medium"]},
-      {type:"practice", title:"Redundant Connection (DSU)", url:R.LC("redundant-connection"), tags:["dsu","medium"]},
-      {type:"ref", depth:true, title:"CP-Algorithms — DSU (union-find)", url:"https://cp-algorithms.com/data_structures/disjoint_set_union.html", tags:["reference"]}
+    id:"w6",
+    title:"Week 6 — Graphs I: BFS/DFS, Grids, Topological Sort",
+    focus:["graphs"],
+    days:"Mon–Sat study, Sun optional",
+    steps:[
+      {
+        id:"w6s1",
+        tag:"Graphs",
+        title:"BFS & DFS fundamentals; Clone Graph",
+        videos:[
+          {t:"Breadth-First Search (Fiset)", u:"https://www.youtube.com/watch?v=xlVX7dXLS64"},
+          {t:"Depth-First Search (Fiset)", u:"https://www.youtube.com/watch?v=7fujbpJ0LB4"},
+          {t:"Clone Graph — LeetCode 133 (NeetCode)", u:"https://www.youtube.com/watch?v=mQeF6bN8hMk"}
+        ],
+        practice:[
+          {t:"LeetCode 133. Clone Graph", u:"https://leetcode.com/problems/clone-graph/"}
+        ]
+      },
+      {
+        id:"w6s2",
+        tag:"Graphs / Grids",
+        title:"Grid BFS classics: Number of Islands, Walls & Gates, Rotting Oranges",
+        videos:[
+          {t:"Number of Islands — LeetCode 200 (NeetCode)", u:"https://www.youtube.com/watch?v=pV2kpPD66nE"},
+          {t:"Walls & Gates — LeetCode 286 (NeetCode)", u:"https://www.youtube.com/watch?v=e69C6xhiSQE"},
+          {t:"Rotting Oranges — LeetCode 994 (NeetCode)", u:"https://www.youtube.com/watch?v=y704fEOx0s0"}
+        ],
+        practice:[
+          {t:"LeetCode 200. Number of Islands", u:"https://leetcode.com/problems/number-of-islands/"},
+          {t:"LeetCode 286. Walls and Gates", u:"https://leetcode.com/problems/walls-and-gates/"},
+          {t:"LeetCode 994. Rotting Oranges", u:"https://leetcode.com/problems/rotting-oranges/"}
+        ]
+      },
+      {
+        id:"w6s3",
+        tag:"Topo Sort",
+        title:"Topological order (Kahn & DFS) + Course Schedule I/II",
+        videos:[
+          {t:"Topological Sort (Kahn) — Fiset", u:"https://www.youtube.com/watch?v=cIBFEhD77b4"},
+          {t:"Course Schedule — LeetCode 207 (NeetCode)", u:"https://www.youtube.com/watch?v=EgI5nU9etnU"},
+          {t:"Course Schedule II — LeetCode 210 (NeetCode)", u:"https://www.youtube.com/watch?v=Akt3glAwyfY"}
+        ],
+        practice:[
+          {t:"LeetCode 207. Course Schedule", u:"https://leetcode.com/problems/course-schedule/"},
+          {t:"LeetCode 210. Course Schedule II", u:"https://leetcode.com/problems/course-schedule-ii/"},
+          {t:"CSES: Course Schedule (Topo)", u:"https://cses.fi/problemset/task/1679"}
+        ]
+      }
     ]
   },
   {
-    week: 6, title: "Graphs II — Shortest Paths, MST, DAG DP (+ CSES intro)",
-    items: [
-      {type:"video", title:"MIT 6.006 / 6.046 — shortest paths & MST (audit free)", url:R.mit6046, tags:["theory"]},
-      {type:"practice", title:"Network Delay Time (Dijkstra)", url:R.LC("network-delay-time"), tags:["dijkstra","medium"]},
-      {type:"practice", title:"Path With Minimum Effort (grid Dijkstra)", url:R.LC("path-with-minimum-effort"), tags:["dijkstra","grid","medium"]},
-      {type:"practice", title:"Cheapest Flights Within K Stops (Bellman-Ford/DP)", url:R.LC("cheapest-flights-within-k-stops"), tags:["bellman-ford","medium"]},
-      {type:"practice", title:"Min Cost to Connect All Points (MST)", url:R.LC("min-cost-to-connect-all-points"), tags:["mst","kruskal/prim","medium"]},
-      {type:"practice", title:"CSES — Sorting & Searching set (pick 5)", url:R.cses, tags:["cses","set"]},
-      {type:"ref", depth:true, title:"CP-Algorithms — Dijkstra (sparse)", url:"https://cp-algorithms.com/graph/dijkstra_sparse.html", tags:["reference"]}
+    id:"w7",
+    title:"Week 7 — Graphs II: Shortest Paths, Union-Find, MST",
+    focus:["shortest","mst","graphs"],
+    days:"Mon–Sat study, Sun optional",
+    steps:[
+      {
+        id:"w7s1",
+        tag:"Shortest Paths",
+        title:"Dijkstra, Bellman-Ford, Floyd-Warshall (+ practice)",
+        videos:[
+          {t:"Dijkstra — Fiset", u:"https://www.youtube.com/watch?v=pSqmAO-m7Lk"},
+          {t:"Bellman-Ford — Fiset", u:"https://www.youtube.com/watch?v=obWXjtg0L64"},
+          {t:"Floyd-Warshall — Fiset", u:"https://www.youtube.com/watch?v=4OQeCuLYj-4"}
+        ],
+        practice:[
+          {t:"CSES: Shortest Routes I (Dijkstra)", u:"https://cses.fi/problemset/task/1671"},
+          {t:"LeetCode 743. Network Delay Time", u:"https://leetcode.com/problems/network-delay-time/"}
+        ]
+      },
+      {
+        id:"w7s2",
+        tag:"Union-Find & MST",
+        title:"Disjoint Set (Union-Find), Kruskal, Prim",
+        videos:[
+          {t:"Union-Find / DSU — Fiset", u:"https://www.youtube.com/watch?v=VHRhJWacxis"},
+          {t:"Kruskal’s MST — Fiset", u:"https://www.youtube.com/watch?v=JZBQLXgSGfs"},
+          {t:"Prim’s MST — Fiset", u:"https://www.youtube.com/watch?v=jsmMtJpPnhU"}
+        ],
+        practice:[
+          {t:"LeetCode 261. Graph Valid Tree (DSU/BFS)", u:"https://leetcode.com/problems/graph-valid-tree/"},
+          {t:"LeetCode 1584. Min Cost to Connect All Points", u:"https://leetcode.com/problems/min-cost-to-connect-all-points/"}
+        ]
+      }
     ]
   },
   {
-    week: 7, title: "Dynamic Programming I — 1D, Knapsack, LIS, Prefix/Intervals",
-    items: [
-      {type:"video", title:"Tushar Roy — DP playlist (free on YouTube)", url:"https://www.youtube.com/playlist?list=PLrmLmBdmIlpsHaNTPP_jHHDx_os9ItYXr", tags:["patterns"]},
-      {type:"practice", title:"Climbing Stairs · House Robber · Decode Ways", url:R.LC("climbing-stairs"), tags:["1D dp","easy→medium"]},
-      {type:"practice", title:"Coin Change · Coin Change II", url:R.LC("coin-change"), tags:["knapsack","medium"]},
-      {type:"practice", title:"Longest Increasing Subsequence (O(n log n))", url:R.LC("longest-increasing-subsequence"), tags:["lis","bisect","medium"]},
-      {type:"practice", title:"Min Cost to Cut Stick / Burst Balloons", url:R.LC("minimum-cost-to-cut-a-stick"), tags:["interval dp","med→hard"]},
-      {type:"ref", depth:true, title:"Sean Prashad — LeetCode patterns (index)", url:R.spPatterns, tags:["roadmap"]}
-    ]
-  },
-  {
-    week: 8, title: "Dynamic Programming II — Grid, Tree DP · Wrap-up & Timed Sets",
-    items: [
-      {type:"video", title:"NeetCode — grid/tree DP selections", url:R.neetcode, tags:["patterns"]},
-      {type:"practice", title:"Unique Paths · Minimum Path Sum", url:R.LC("unique-paths"), tags:["grid dp","easy→medium"]},
-      {type:"practice", title:"Diameter of Binary Tree · Max Path Sum", url:R.LC("diameter-of-binary-tree"), tags:["tree dp","easy→hard"]},
-      {type:"practice", title:"CSES — DP section (pick any 4)", url:R.cses, tags:["cses","dp"]},
-      {type:"practice", title:"Timed set: choose 1 CF/AtCoder round (Div4/ABC)", url:"https://codeforces.com/contests", tags:["timed"]},
-      {type:"ref",   title:"USACO Guide — topic roadmaps & graded problems", url:R.usacoguide, tags:["roadmap","graded"]}
+    id:"w8",
+    title:"Week 8 — Dynamic Programming I/II + Tries (stretch)",
+    focus:["dp","trie","advanced"],
+    days:"Mon–Sat study, Sun optional",
+    steps:[
+      {
+        id:"w8s1",
+        tag:"DP 1-D",
+        title:"Climbing Stairs, House Robber, Coin Change",
+        videos:[
+          {t:"Climbing Stairs — LeetCode 70 (NeetCode)", u:"https://www.youtube.com/watch?v=Y0lT9Fck7qI"},
+          {t:"Coin Change — LeetCode 322 (NeetCode)", u:"https://www.youtube.com/watch?v=H9bfqozjoqs"},
+          {t:"House Robber II (circular variant) — LeetCode 213 (NeetCode)", u:"https://www.youtube.com/watch?v=rWAJCfYYOvM"}
+        ],
+        practice:[
+          {t:"LeetCode 70. Climbing Stairs", u:"https://leetcode.com/problems/climbing-stairs/"},
+          {t:"LeetCode 198. House Robber", u:"https://leetcode.com/problems/house-robber/"},
+          {t:"LeetCode 322. Coin Change", u:"https://leetcode.com/problems/coin-change/"}
+        ]
+      },
+      {
+        id:"w8s2",
+        tag:"DP Sequences",
+        title:"LIS (n log n), Word Break, Longest Palindromic Substring",
+        videos:[
+          {t:"Longest Increasing Subsequence — Tushar Roy", u:"https://www.youtube.com/watch?v=CE2b_-XfVDk"},
+          {t:"Word Break — LeetCode 139 (NeetCode)", u:"https://www.youtube.com/watch?v=Sx9NNgInc3A"},
+          {t:"Longest Palindromic Substring — LeetCode 5 (NeetCode)", u:"https://www.youtube.com/watch?v=XYQecbcd6_c"}
+        ],
+        practice:[
+          {t:"LeetCode 300. LIS", u:"https://leetcode.com/problems/longest-increasing-subsequence/"},
+          {t:"LeetCode 139. Word Break", u:"https://leetcode.com/problems/word-break/"},
+          {t:"LeetCode 5. Longest Palindromic Substring", u:"https://leetcode.com/problems/longest-palindromic-substring/"}
+        ]
+      },
+      {
+        id:"w8s3",
+        tag:"Trie / Advanced",
+        title:"Trie & Segment/Fenwick Trees (stretch/optional)",
+        videos:[
+          {t:"Implement Trie (Prefix Tree) — LeetCode 208 (NeetCode)", u:"https://www.youtube.com/watch?v=oobqoCJlHA0"},
+          {t:"Segment Trees — Fiset", u:"https://www.youtube.com/watch?v=ZBHKZF5w4YU"},
+          {t:"Fenwick (Binary Indexed) Tree — Fiset", u:"https://www.youtube.com/watch?v=dp-gWnYzjQI"}
+        ],
+        practice:[
+          {t:"LeetCode 208. Implement Trie", u:"https://leetcode.com/problems/implement-trie-prefix-tree/"},
+          {t:"CSES Range Queries (pick any 2)", u:"https://cses.fi/problemset/"}
+        ]
+      }
     ]
   }
 ];
 
-/* ---------- Rendering & interactions ---------- */
-const $weeks = document.getElementById("weeks");
-const STORAGE = "dsa_pro_plan_progress_v2";
+// ---------- UI Logic ----------
+const weekList = document.getElementById('weekList');
+const stepsEl = document.getElementById('steps');
+const weekTitle = document.getElementById('weekTitle');
+const bar = document.getElementById('bar');
+const pct = document.getElementById('pct');
+const search = document.getElementById('search');
+const filter = document.getElementById('filter');
+const expandAllBtn = document.getElementById('expandAll');
+const collapseAllBtn = document.getElementById('collapseAll');
 
-function loadProgress(){ try{return JSON.parse(localStorage.getItem(STORAGE)||"{}");}catch{return{}} }
-function saveProgress(p){ localStorage.setItem(STORAGE, JSON.stringify(p)); }
-let progress = loadProgress();
-const itemId = (w,i)=>`w${w}i${i}`;
+const stateKey = "dsa-plan-progress-v3";
+let done = JSON.parse(localStorage.getItem(stateKey) || "{}");
+let currentWeekId = PLAN[0].id;
 
-function render(){
-  $weeks.innerHTML = "";
-  const q = document.getElementById("search").value.trim().toLowerCase();
-  const showVideo = document.getElementById("flt-video").checked;
-  const showPractice = document.getElementById("flt-practice").checked;
-  const showRef = document.getElementById("flt-ref").checked;
-  const showDepth = document.getElementById("show-depth").checked;
+function save(){ localStorage.setItem(stateKey, JSON.stringify(done)); updateProgress(); }
+function setWeek(id){ currentWeekId = id; renderWeeks(); renderSteps(); }
+function toggleStep(stepId){ done[stepId] = !done[stepId]; save(); }
 
-  PLAN.forEach(({week, title, items})=>{
-    const vis = items.map(it=>{
-      const typeOk = (it.type==="video"&&showVideo)||(it.type==="practice"&&showPractice)||(it.type==="ref"&&showRef);
-      const depthOk = showDepth || !it.depth;
-      const hay = (it.title+" "+(it.tags||[]).join(" ")+" "+title).toLowerCase();
-      const qOk = !q || hay.includes(q);
-      return typeOk && depthOk && qOk;
-    });
-    if(!vis.some(Boolean)) return;
-
-    const details = document.createElement("details");
-    details.className="week"; details.open=true;
-
-    const sum = document.createElement("summary");
-    sum.className="summary";
-    sum.innerHTML = `<h2>${week===0?"Week 0 (Optional)":"Week "+week}: ${title}</h2>
-      <span class="meta"><span class="badge">${items.filter((_,i)=>vis[i]).length} items</span>
-      <span class="badge">${checkedCount(items, week, vis)} done</span></span>`;
-    details.appendChild(sum);
-
-    const list = document.createElement("div"); list.className="list";
-    items.forEach((it,i)=>{
-      if(!vis[i]) return;
-      const id = itemId(week,i);
-      const done = !!progress[id];
-      const li = document.createElement("div");
-      li.className="item";
-
-      const cls = it.type==="video"?"video":(it.type==="practice"?"practice":"ref");
-      const tags = (it.tags||[]).map(t=>`<span class="badge">${t}</span>`).join(" ");
-      const depth = it.depth?`<span class="badge" title="Optional depth item">depth</span>`:"";
-
-      li.innerHTML = `
-        <div class="row">
-          <label style="display:flex;align-items:center;gap:8px">
-            <input type="checkbox" ${done?"checked":""} aria-label="Mark complete"/>
-            <span class="type ${cls}">${it.type}</span>
-          </label>
-          <a class="title ${done?"strike":""}" href="${it.url}" target="_blank" rel="noopener">${it.title}</a>
-          <div style="margin-left:auto;display:flex;gap:8px">
-            <a class="btn" href="${it.url}" target="_blank" rel="noopener">Open</a>
-          </div>
-        </div>
-        <div class="row"><span class="muted">${tags} ${depth}</span></div>
-      `;
-      li.querySelector('input[type="checkbox"]').addEventListener("change",(e)=>{
-        progress[id]=e.target.checked; saveProgress(progress); render();
-      });
-      list.appendChild(li);
-    });
-
-    details.appendChild(list);
-    $weeks.appendChild(details);
+function renderWeeks(){
+  weekList.innerHTML = "";
+  PLAN.forEach(w=>{
+    const total = w.steps.length;
+    const c = w.steps.filter(s=>done[s.id]).length;
+    const p = Math.round(c*100/total);
+    const div = document.createElement('div');
+    div.className = "week"+(w.id===currentWeekId?" active":"");
+    div.innerHTML = `
+      <h3>${w.title}</h3>
+      <div class="meta">${w.days}</div>
+      <div class="meta" style="margin-top:6px">
+        <span class="tag">${w.focus.map(x=>`#${x}`).join(" ")}</span>
+      </div>
+      <div style="margin-top:8px;height:8px;background:#0b1220;border:1px solid #263347;border-radius:999px;overflow:hidden">
+        <div style="height:100%;width:${p}%;background:linear-gradient(90deg,#5eead4,#60a5fa)"></div>
+      </div>`;
+    div.addEventListener('click', ()=>setWeek(w.id));
+    weekList.appendChild(div);
   });
 }
 
-function checkedCount(items, week, vis){
-  let c=0; items.forEach((_,i)=>{ if(vis[i] && progress[itemId(week,i)]) c++; }); return c;
+function linkIcon(url){
+  const yt = /youtube\.com|youtu\.be/.test(url);
+  const lc = /leetcode\.com/.test(url);
+  const cses = /cses\.fi/.test(url);
+  if(yt) return "▶";
+  if(lc) return "🧩";
+  if(cses) return "📘";
+  return "↗";
 }
 
-const debounce=(fn,ms=180)=>{let t; return (...a)=>{clearTimeout(t); t=setTimeout(()=>fn(...a),ms);}};
+function renderSteps(){
+  const W = PLAN.find(w=>w.id===currentWeekId);
+  weekTitle.textContent = W.title;
+  stepsEl.innerHTML = "";
 
-document.getElementById("search").addEventListener("input",debounce(render));
-["flt-video","flt-practice","flt-ref","show-depth"].forEach(id=>{
-  document.getElementById(id).addEventListener("change",render);
-});
-document.getElementById("expand-all").addEventListener("click",()=>{document.querySelectorAll("details.week").forEach(d=>d.open=true)});
-document.getElementById("collapse-all").addEventListener("click",()=>{document.querySelectorAll("details.week").forEach(d=>d.open=false)});
+  const q = (search.value||"").toLowerCase();
+  const f = filter.value;
 
-document.getElementById("next").addEventListener("click",()=>{
-  const q = document.getElementById("search").value.trim().toLowerCase();
-  const showVideo = document.getElementById("flt-video").checked;
-  const showPractice = document.getElementById("flt-practice").checked;
-  const showRef = document.getElementById("flt-ref").checked;
-  const showDepth = document.getElementById("show-depth").checked;
+  W.steps.forEach(s=>{
+    const hay = (s.title+" "+(s.videos?.map(v=>v.t).join(" ")||"")+" "+(s.practice?.map(p=>p.t).join(" ")||"")).toLowerCase();
+    const fitsSearch = !q || hay.includes(q);
+    const fitsFilter = f==="all" || W.focus.includes(f) || s.tag.toLowerCase().includes(f);
+    if(!(fitsSearch && fitsFilter)) return;
 
-  for(const {week,title,items} of PLAN){
-    for(let i=0;i<items.length;i++){
-      const it = items[i]; const id=itemId(week,i);
-      const typeOk=(it.type==="video"&&showVideo)||(it.type==="practice"&&showPractice)||(it.type==="ref"&&showRef);
-      const depthOk=showDepth||!it.depth;
-      const hay=(it.title+" "+(it.tags||[]).join(" ")+" "+title).toLowerCase();
-      const qOk=!q||hay.includes(q);
-      if(typeOk&&depthOk&&qOk&&!progress[id]){ window.open(it.url,"_blank","noopener"); return; }
-    }
-  }
-  alert("No remaining visible items. Great work.");
-});
+    const wrapper = document.createElement('div');
+    wrapper.className = "step";
+    wrapper.dataset.id = s.id;
 
-document.getElementById("export").addEventListener("click",()=>{
-  const blob=new Blob([JSON.stringify(progress,null,2)],{type:"application/json"});
-  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="dsa_progress.json"; a.click(); URL.revokeObjectURL(a.href);
-});
-document.getElementById("import").addEventListener("click",async ()=>{
-  const inp=document.createElement("input"); inp.type="file"; inp.accept="application/json";
-  inp.onchange=async()=>{ const f=inp.files?.[0]; if(!f) return; try{ const t=await f.text(); const data=JSON.parse(t); if(typeof data==="object"){progress=data; saveProgress(progress); render();} else alert("Invalid file.");}catch{alert("Could not read file.");}};
-  inp.click();
-});
-document.getElementById("reset").addEventListener("click",()=>{ if(confirm("Clear all progress?")){progress={}; saveProgress(progress); render();} });
+    wrapper.innerHTML = `
+      <div class="step-head">
+        <span class="chip">${s.tag}</span>
+        <h4>${s.title}</h4>
+        <div class="grow"></div>
+        <div class="donebox">
+          <input type="checkbox" ${done[s.id]?"checked":""} />
+          <label>Done</label>
+        </div>
+      </div>
+      <div class="step-body">
+        <div class="grid-2">
+          <div>
+            <div class="kicker" style="margin-bottom:6px">Watch</div>
+            <div class="links">
+              ${(s.videos||[]).map(v=>(
+                `<a href="${v.u}" target="_blank" rel="noopener">
+                  <span>${linkIcon(v.u)}</span>
+                  <div><div>${v.t}</div><small>${new URL(v.u).hostname}</small></div>
+                </a>`
+              )).join("")}
+            </div>
+          </div>
+          <div>
+            <div class="kicker" style="margin-bottom:6px">Practice</div>
+            <div class="links">
+              ${(s.practice||[]).map(p=>(
+                `<a href="${p.u}" target="_blank" rel="noopener">
+                  <span>${linkIcon(p.u)}</span>
+                  <div><div>${p.t}</div><small>${new URL(p.u).hostname}</small></div>
+                </a>`
+              )).join("")}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
 
-window.addEventListener("keydown",(e)=>{ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault(); document.getElementById("search").focus();}});
-render();
+    const checkbox = wrapper.querySelector('input[type=checkbox]');
+    checkbox.addEventListener('change', ()=>{ toggleStep(s.id); });
+
+    const head = wrapper.querySelector('.step-head');
+    const body = wrapper.querySelector('.step-body');
+    head.addEventListener('click', (e)=>{
+      if(e.target===checkbox) return;
+      body.style.display = body.style.display==='block' ? 'none' : 'block';
+    });
+
+    stepsEl.appendChild(wrapper);
+  });
+}
+
+function updateProgress(){
+  const all = PLAN.flatMap(w=>w.steps.map(s=>s.id));
+  const doneCount = all.filter(id=>done[id]).length;
+  const p = Math.round(100*doneCount/all.length);
+  bar.style.width = p+"%";
+  pct.textContent = p+"%";
+}
+
+document.getElementById('exportBtn').onclick = ()=>{
+  const blob = new Blob([JSON.stringify(done,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = Object.assign(document.createElement('a'), {href:url, download:'dsa-progress.json'});
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+};
+
+document.getElementById('importBtn').onclick = ()=>document.getElementById('importFile').click();
+document.getElementById('importFile').onchange = (e)=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{ try{ done = JSON.parse(reader.result); save(); renderWeeks(); renderSteps(); }catch(_){} };
+  reader.readAsText(file);
+};
+
+document.getElementById('resetBtn').onclick = ()=>{ if(confirm("Reset all progress?")){ done = {}; save(); renderWeeks(); renderSteps(); } };
+
+expandAllBtn.onclick = ()=>{
+  document.querySelectorAll('.step .step-body').forEach(b=>b.style.display='block');
+};
+collapseAllBtn.onclick = ()=>{
+  document.querySelectorAll('.step .step-body').forEach(b=>b.style.display='none');
+};
+
+search.oninput = renderSteps;
+filter.onchange = renderSteps;
+
+renderWeeks(); renderSteps(); updateProgress();
 </script>
 </body>
 </html>
