@@ -3,272 +3,290 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>8-Week DS&A Roadmap (Interactive)</title>
+<title>Professional 8-Week DSA Plan (Interactive, Free)</title>
+<meta name="description" content="A curated, interactive 8-week Data Structures & Algorithms roadmap using only free videos and practice sites. Includes progress tracking and filters."/>
 <style>
   :root{
-    --bg:#0f1216; --panel:#151a20; --muted:#9fb0c4; --text:#e8eef6; --accent:#7cc4ff; --accent2:#9effa9; --danger:#ff9aa2; --border:#2a3340; --tag:#1f2730;
+    --bg:#0b0d11; --panel:#121720; --raised:#161d27; --text:#e9eef7; --muted:#96a7bd; --border:#263041;
+    --accent:#5fb0ff; --accent2:#71e49c; --warn:#f9b24e; --danger:#ff8a9c; --tag:#1a2230;
   }
   @media (prefers-color-scheme: light){
-    :root{ --bg:#f6f9fc; --panel:#ffffff; --muted:#506176; --text:#0c1116; --accent:#005bbb; --accent2:#137333; --danger:#b00020; --border:#e5ecf3; --tag:#eef5ff; }
+    :root{ --bg:#f6f9fc; --panel:#ffffff; --raised:#f9fbfe; --text:#0c1116; --muted:#4f6177; --border:#e6edf5; --accent:#0a69c7; --accent2:#147a3e; --warn:#b66a00; --danger:#b00020; --tag:#eef5ff }
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Noto Sans,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue","Noto Sans"}
   a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
   .wrap{max-width:1100px;margin:auto;padding:24px}
-  header{display:grid;gap:14px;margin-bottom:14px}
-  h1{font-size:clamp(22px,3.2vw,32px);margin:0}
+  header{display:grid;gap:10px;margin-bottom:12px}
+  h1{margin:0;font-size:clamp(22px,3.2vw,34px)}
   .sub{color:var(--muted)}
-  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-  .controls > *{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
-  .controls input[type="search"]{min-width:260px;outline:none}
-  .btn{cursor:pointer;border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:10px;padding:10px 12px}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px}
+  .controls>*{border:1px solid var(--border);background:var(--panel);border-radius:10px;padding:10px 12px}
+  .btn{cursor:pointer}
   .btn:hover{border-color:var(--accent)}
-  .badge{font-size:12px;padding:2px 8px;border-radius:99px;background:var(--tag);border:1px solid var(--border);color:var(--muted)}
+  .danger{color:var(--danger)}
   .grid{display:grid;gap:14px}
-  @media(min-width:800px){ .grid{grid-template-columns:1fr 1fr} }
-  details.week{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--panel)}
+  @media(min-width:860px){ .grid{grid-template-columns:1fr 1fr} }
+  details.week{border:1px solid var(--border);border-radius:14px;background:var(--panel);overflow:hidden}
   details[open] .summary{border-bottom:1px solid var(--border)}
   .summary{list-style:none;padding:14px 16px;display:flex;gap:10px;align-items:center;cursor:pointer}
-  .summary h2{font-size:18px;margin:0}
-  .summary .meta{margin-left:auto;display:flex;gap:8px;align-items:center;color:var(--muted)}
-  .list{padding:10px 14px 18px 14px;display:grid;gap:10px}
-  .item{display:grid;gap:6px;border:1px dashed var(--border);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,0.02)}
+  .summary h2{margin:0;font-size:18px}
+  .meta{margin-left:auto;display:flex;gap:8px;color:var(--muted);align-items:center}
+  .badge{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--tag);border:1px solid var(--border)}
+  .list{padding:10px 14px 16px;display:grid;gap:10px}
+  .item{display:grid;gap:6px;border:1px dashed var(--border);border-radius:12px;padding:10px 12px;background:var(--raised)}
   .row{display:flex;gap:10px;align-items:center}
   .type{font-size:12px;padding:2px 8px;border-radius:8px;border:1px solid var(--border);background:var(--tag)}
   .type.video{color:var(--accent)}
   .type.practice{color:var(--accent2)}
+  .type.ref{color:var(--warn)}
   .title{font-weight:600}
-  .actions{margin-left:auto;display:flex;gap:8px}
   .muted{color:var(--muted)}
-  .footer{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-  .hint{color:var(--muted);font-size:13px}
-  .sr{position:absolute;left:-9999px}
   .strike{opacity:.55;text-decoration:line-through}
-  .danger{color:var(--danger)}
-  code.k{background:var(--tag);border:1px solid var(--border);padding:2px 6px;border-radius:6px}
+  .note{font-size:13px;color:var(--muted)}
+  .footer{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .k{background:var(--tag);border:1px solid var(--border);padding:2px 6px;border-radius:6px}
+  .toggle{display:flex;gap:8px;align-items:center}
+  .pill{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--border);border-radius:999px;padding:4px 10px;background:var(--raised)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>8-Week Data Structures & Algorithms Roadmap</h1>
-    <div class="sub">Free videos + free coding sites. Check items as you go (auto-saved to your browser).</div>
+    <h1>Professional 8-Week DSA Roadmap (Free)</h1>
+    <div class="sub">Balanced mix of university-grade theory, pattern practice, visual intuition, and graded problemsets. Your progress is saved locally in this browser.</div>
     <div class="controls" role="region" aria-label="Filters and actions">
-      <input id="search" type="search" placeholder="Search topics (e.g., dijkstra, dp, sliding window)"/>
-      <label><input type="checkbox" id="flt-video" checked/> Videos</label>
-      <label><input type="checkbox" id="flt-practice" checked/> Practice</label>
-      <button class="btn" id="expand-all" title="Expand all weeks">Expand all</button>
-      <button class="btn" id="collapse-all" title="Collapse all weeks">Collapse all</button>
-      <button class="btn" id="next" title="Open the next unchecked visible item">Open next ▶</button>
-      <button class="btn" id="export" title="Export progress as JSON">Export</button>
-      <button class="btn" id="import" title="Import progress JSON">Import</button>
-      <button class="btn danger" id="reset" title="Clear all progress">Reset</button>
+      <input id="search" type="search" placeholder="Search topics (e.g., dijkstra, dp, two pointers)" />
+      <label class="toggle"><input id="flt-video" type="checkbox" checked/> Videos</label>
+      <label class="toggle"><input id="flt-practice" type="checkbox" checked/> Practice</label>
+      <label class="toggle"><input id="flt-ref" type="checkbox" checked/> References</label>
+      <label class="toggle"><input id="show-depth" type="checkbox"/> Show Depth items</label>
+      <span class="pill" title="Study cadence">⏱️ <strong>90–120 min/day</strong>, 5 days/week</span>
+      <button class="btn" id="expand-all">Expand all</button>
+      <button class="btn" id="collapse-all">Collapse all</button>
+      <button class="btn" id="next">Open next ▶</button>
+      <button class="btn" id="export">Export</button>
+      <button class="btn" id="import">Import</button>
+      <button class="btn danger" id="reset">Reset</button>
     </div>
+    <div class="note">Order rationale: each week layers a **few core patterns**, then immediately **consolidates with practice** and **visuals**. “Depth” items are optional stretch goals or advanced proofs.</div>
   </header>
 
   <div id="weeks" class="grid" aria-live="polite"></div>
 
+  <section class="note" style="margin-top:18px">
+    <strong>How to study</strong> — Day 1: 1–2 short lectures → Day 2–3: 4–6 problems in the week’s pattern → Day 4: one harder set → Day 5: 60–75 min timed set. Keep a running notebook: idea → invariant/state → complexity → pitfalls.
+  </section>
+
   <div class="footer">
-    <span class="hint">Tip: use <code class="k">Ctrl/⌘+K</code> to jump to search. Your progress is stored in <code class="k">localStorage</code> under this browser.</span>
+    <span class="note">Tip: <span class="k">Ctrl/⌘+K</span> focuses search. Your progress lives in <span class="k">localStorage</span>.</span>
   </div>
 </div>
 
 <script>
-/* ---------- Data (links to free sources) ---------- */
+/* ---------- Curated resources (all free to view / audit) ---------- */
 const R = {
-  neetcodeChannel: "https://www.youtube.com/c/neetcode",
-  neetcodeOrder: "https://www.youtube.com/watch?v=tohk1ETx3ZM",
-  fisetGraphs: "https://www.youtube.com/playlist?list=PLDV1Zeh2NRsDGO4--qE8yH72HFL1Km93P",
-  fisetDS: "https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu",
-  fisetHeaps: "https://www.youtube.com/playlist?list=PLDV1Zeh2NRsCLFSHm1nYb9daYf60lCcag",
-  abdulBariAlgo: "https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O",
-  mit6006: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
-  mit6006YT: "https://www.youtube.com/playlist?list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY",
-  freeCodeCampDSAPy: "https://www.freecodecamp.org/news/learn-algorithms-and-data-structures-in-python/",
-  tusharDP: "https://www.youtube.com/playlist?list=PLrmLmBdmIlpsHaNTPP_jHHDx_os9ItYXr",
+  // UNIVERSITY-LEVEL THEORY
+  mit6006: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",         // OCW page
+  mit6006YT: "https://www.youtube.com/playlist?list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY",        // full lectures
+  mit6046: "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/",
+  mit6046YT: "https://www.youtube.com/playlist?list=PLUl4u3cNGP6317WaSNfmCvGym2ucw3oGp",
+
+  princetonAlgI: "https://www.coursera.org/learn/algorithms-part1", // audit free
+  princetonInfo: "https://online.princeton.edu/algorithms-part-i",
+
+  // PRACTICAL PATTERNS & WALK-THROUGHS
+  neetcode: "https://www.youtube.com/c/neetcode",
+  spPatterns: "https://seanprashad.com/leetcode-patterns/",
+  // VISUALIZATION
+  visualgo: "https://visualgo.net/",
+  visSort: "https://visualgo.net/en/sorting",
+  visList: "https://visualgo.net/en/list",
+  visBST: "https://visualgo.net/en/bst",
+  visGraph: "https://visualgo.net/en/graphds",
+  visDFS: "https://visualgo.net/en/dfsbfs",
+
+  // PROBLEMSETS / IDE
   cses: "https://cses.fi/problemset/",
-  cfContests: "https://codeforces.com/contests",
-  atcoderContests: "https://atcoder.jp/contests/",
-  csesLongestFlight: "https://cses.fi/problemset/task/1680",
-  csesHamiltonian: "https://cses.fi/problemset/task/1690",
-  // LeetCode helpers:
-  LC:(slug)=>`https://leetcode.com/problems/${slug}/`
+  usacoguide: "https://usaco.guide/",
+  usacoProblems: "https://usaco.guide/problems/",
+  usacoIDE: "https://ide.usaco.guide/",
+
+  // REFERENCE (DERIVATIONS / PSEUDOCODE)
+  cpalgo: "https://cp-algorithms.com/index.html",
+
+  // LeetCode helper
+  LC: (slug) => `https://leetcode.com/problems/${slug}/`
 };
 
+/* ---------- The plan ---------- */
+/* type: "video" | "practice" | "ref"
+   depth: optional stretch item (hidden unless toggled)
+*/
 const PLAN = [
   {
-    week: 1, title: "Big-O, Arrays, Strings, Hashing, Two Pointers, Sliding Window",
+    week: 0, title: "Onboarding (Optional) — Python refresh, Big-O orientation, tooling",
     items: [
-      {type:"video", title:"(Primer) Best order to learn DS&A – NeetCode", url:R.neetcodeOrder, tags:["overview","order"]},
-      {type:"video", title:"MIT 6.006 intro (asymptotics basics)", url:R.mit6006YT, tags:["big-o","asymptotics"]},
-      {type:"video", title:"Arrays/Hashing patterns – NeetCode channel", url:R.neetcodeChannel, tags:["arrays","hashing"]},
+      {type:"video", title:"MIT 6.006 — course overview & asymptotics (audit free)", url:R.mit6006, tags:["big-o","asymptotics","theory"]},
+      {type:"video", title:"freeCodeCamp — DS&A in Python (sections you need)", url:"https://www.freecodecamp.org/news/learn-algorithms-and-data-structures-in-python/", tags:["python","overview"]},
+      {type:"ref",   title:"VisuAlgo — quick tour (sorting, lists, BST, BFS/DFS)", url:R.visualgo, tags:["visual"]},
+      {type:"ref",   title:"USACO Guide — how to run code online", url:"https://usaco.guide/general/running-code-online", tags:["ide"]},
+    ]
+  },
+  {
+    week: 1, title: "Arrays, Strings, Hashing · Two-Pointers · Sliding Window",
+    items: [
+      {type:"video", title:"NeetCode — Arrays/Hashing patterns (YouTube channel)", url:R.neetcode, tags:["patterns","practice-first"]},
+      {type:"ref",   title:"VisuAlgo — arrays / list ops / stable sorts", url:R.visSort, tags:["visual"]},
       {type:"practice", title:"Two Sum", url:R.LC("two-sum"), tags:["hashmap","easy"]},
-      {type:"practice", title:"Valid Anagram", url:R.LC("valid-anagram"), tags:["hashing","easy"]},
-      {type:"practice", title:"Group Anagrams", url:R.LC("group-anagrams"), tags:["hashmap","medium"]},
-      {type:"practice", title:"Valid Palindrome", url:R.LC("valid-palindrome"), tags:["string","two-pointers","easy"]},
+      {type:"practice", title:"Valid Anagram", url:R.LC("valid-anagram"), tags:["hash","easy"]},
+      {type:"practice", title:"Group Anagrams", url:R.LC("group-anagrams"), tags:["hash","medium"]},
       {type:"practice", title:"3Sum", url:R.LC("3sum"), tags:["two-pointers","medium"]},
       {type:"practice", title:"Container With Most Water", url:R.LC("container-with-most-water"), tags:["two-pointers","medium"]},
       {type:"practice", title:"Longest Substring Without Repeating", url:R.LC("longest-substring-without-repeating-characters"), tags:["sliding window","medium"]},
-      {type:"practice", title:"Minimum Window Substring", url:R.LC("minimum-window-substring"), tags:["sliding window","hard"]},
-      {type:"practice", title:"Subarray Sum Equals K", url:R.LC("subarray-sum-equals-k"), tags:["prefix sum","hashmap","medium"]},
+      {type:"practice", title:"Minimum Window Substring (capstone)", url:R.LC("minimum-window-substring"), tags:["sliding window","hard"]},
+      {type:"ref", depth:true, title:"CP-Algorithms — two-pointers technique", url:"https://cp-algorithms.com/two_pointers/section.html", tags:["reference"]}
     ]
   },
   {
-    week: 2, title: "Stacks, Queues, Linked Lists, Prefix Sums, Monotonic Stack/Queue",
+    week: 2, title: "Stacks & Queues · Monotonic Structures · Linked Lists · Prefix Sums",
     items: [
-      {type:"video", title:"Stacks/Queues/Monotonic structures – William Fiset (DS playlist)", url:R.fisetDS, tags:["stack","queue","monotonic"]},
-      {type:"video", title:"Linked Lists – NeetCode channel", url:R.neetcodeChannel, tags:["linked list"]},
-      {type:"practice", title:"Reverse Linked List", url:R.LC("reverse-linked-list"), tags:["linked list","easy"]},
-      {type:"practice", title:"Merge Two Sorted Lists", url:R.LC("merge-two-sorted-lists"), tags:["linked list","easy"]},
-      {type:"practice", title:"Linked List Cycle (Floyd's)", url:R.LC("linked-list-cycle"), tags:["linked list","two pointers","easy"]},
-      {type:"practice", title:"Reorder List", url:R.LC("reorder-list"), tags:["linked list","medium"]},
+      {type:"video", title:"William Fiset — Data Structures playlist (stack/queue/monotonic)", url:"https://www.youtube.com/playlist?list=PLDV1Zeh2NRsB6SWUrDFW2RmDotAfPbeHu", tags:["theory","impl"]},
+      {type:"ref",   title:"VisuAlgo — lists / stack / queue", url:R.visList, tags:["visual"]},
       {type:"practice", title:"Valid Parentheses", url:R.LC("valid-parentheses"), tags:["stack","easy"]},
       {type:"practice", title:"Min Stack", url:R.LC("min-stack"), tags:["stack","medium"]},
-      {type:"practice", title:"Daily Temperatures (monotonic stack)", url:R.LC("daily-temperatures"), tags:["monotonic","medium"]},
-      {type:"practice", title:"Range Sum Query - Immutable", url:R.LC("range-sum-query-immutable"), tags:["prefix sum","easy"]},
+      {type:"practice", title:"Daily Temperatures (monotonic)", url:R.LC("daily-temperatures"), tags:["monotonic","medium"]},
+      {type:"practice", title:"Reverse Linked List", url:R.LC("reverse-linked-list"), tags:["linked list","easy"]},
+      {type:"practice", title:"Merge Two Sorted Lists", url:R.LC("merge-two-sorted-lists"), tags:["linked list","easy"]},
+      {type:"practice", title:"Linked List Cycle (Floyd)", url:R.LC("linked-list-cycle"), tags:["two pointers","easy"]},
+      {type:"practice", title:"Reorder List", url:R.LC("reorder-list"), tags:["linked list","medium"]},
+      {type:"practice", title:"Subarray Sum Equals K", url:R.LC("subarray-sum-equals-k"), tags:["prefix sum","medium"]}
     ]
   },
   {
-    week: 3, title: "Sorting, Binary Search, Recursion & Divide-and-Conquer",
+    week: 3, title: "Sorting (Merge/Quick/Heap) · Binary Search · Divide & Conquer",
     items: [
-      {type:"video", title:"Merge/Quick sort – Abdul Bari playlist", url:R.abdulBariAlgo, tags:["sorting"]},
-      {type:"video", title:"Binary Search patterns – NeetCode channel", url:R.neetcodeChannel, tags:["binary search"]},
-      {type:"practice", title:"Merge Intervals", url:R.LC("merge-intervals"), tags:["intervals","sorting","medium"]},
-      {type:"practice", title:"Non-overlapping Intervals", url:R.LC("non-overlapping-intervals"), tags:["intervals","greedy","medium"]},
+      {type:"video", title:"Princeton Algorithms Part I — sorting/searching (audit free)", url:R.princetonAlgI, tags:["theory","audit"]},
+      {type:"video", title:"Binary Search patterns — NeetCode", url:R.neetcode, tags:["patterns"]},
+      {type:"practice", title:"Merge Intervals", url:R.LC("merge-intervals"), tags:["sorting","intervals","medium"]},
+      {type:"practice", title:"Non-overlapping Intervals", url:R.LC("non-overlapping-intervals"), tags:["greedy","medium"]},
       {type:"practice", title:"Search in Rotated Sorted Array", url:R.LC("search-in-rotated-sorted-array"), tags:["binary search","medium"]},
-      {type:"practice", title:"Koko Eating Bananas", url:R.LC("koko-eating-bananas"), tags:["binary search on answer","medium"]},
-      {type:"practice", title:"Median of Two Sorted Arrays", url:R.LC("median-of-two-sorted-arrays"), tags:["binary search","hard"]},
-      {type:"practice", title:"Pow(x, n)", url:R.LC("powx-n"), tags:["recursion","log n","medium"]},
-      {type:"practice", title:"Majority Element (D&C)", url:R.LC("majority-element"), tags:["divide-and-conquer","easy"]},
-      {type:"practice", title:"Merge k Sorted Lists (heap)", url:R.LC("merge-k-sorted-lists"), tags:["heap","hard"]},
+      {type:"practice", title:"Koko Eating Bananas (binary search on answer)", url:R.LC("koko-eating-bananas"), tags:["binary search","medium"]},
+      {type:"practice", title:"Median of Two Sorted Arrays (capstone)", url:R.LC("median-of-two-sorted-arrays"), tags:["binary search","hard"]},
+      {type:"ref", depth:true, title:"CP-Algorithms — binary exponentiation (D&C idea)", url:"https://cp-algorithms.com/algebra/binary-exp.html", tags:["reference"]}
     ]
   },
   {
-    week: 4, title: "Trees + Heaps/Priority Queues",
+    week: 4, title: "Trees · BST · Priority Queues (Heaps)",
     items: [
-      {type:"video", title:"Tree traversals/BST – (mix) Fiset + NeetCode", url:R.neetcodeChannel, tags:["tree","bst"]},
-      {type:"video", title:"Heaps / Priority Queues – William Fiset (playlist)", url:R.fisetHeaps, tags:["heap","priority queue"]},
-      {type:"practice", title:"Binary Tree Inorder Traversal", url:R.LC("binary-tree-inorder-traversal"), tags:["dfs","easy"]},
-      {type:"practice", title:"Binary Tree Preorder Traversal", url:R.LC("binary-tree-preorder-traversal"), tags:["dfs","easy"]},
-      {type:"practice", title:"Binary Tree Postorder Traversal", url:R.LC("binary-tree-postorder-traversal"), tags:["dfs","easy"]},
+      {type:"video", title:"MIT 6.006 — BSTs/Heaps lectures (audit free)", url:R.mit6006YT, tags:["theory"]},
+      {type:"ref",   title:"VisuAlgo — BST • rotations • traversal", url:R.visBST, tags:["visual"]},
+      {type:"video", title:"William Fiset — Heaps / priority queues", url:"https://www.youtube.com/playlist?list=PLDV1Zeh2NRsCLFSHm1nYb9daYf60lCcag", tags:["impl"]},
+      {type:"practice", title:"Binary Tree Inorder / Preorder / Postorder", url:R.LC("binary-tree-inorder-traversal"), tags:["dfs","easy"]},
       {type:"practice", title:"Level Order Traversal", url:R.LC("binary-tree-level-order-traversal"), tags:["bfs","medium"]},
       {type:"practice", title:"Validate BST", url:R.LC("validate-binary-search-tree"), tags:["bst","medium"]},
       {type:"practice", title:"Kth Smallest in BST", url:R.LC("kth-smallest-element-in-a-bst"), tags:["bst","medium"]},
-      {type:"practice", title:"LCA of BST", url:R.LC("lowest-common-ancestor-of-a-binary-search-tree"), tags:["bst","easy"]},
-      {type:"practice", title:"Kth Largest Element in an Array", url:R.LC("kth-largest-element-in-an-array"), tags:["heap","medium"]},
-      {type:"practice", title:"Top K Frequent Elements", url:R.LC("top-k-frequent-elements"), tags:["heap","medium"]},
+      {type:"practice", title:"Kth Largest in Array (heap)", url:R.LC("kth-largest-element-in-an-array"), tags:["heap","medium"]},
+      {type:"practice", title:"Top-K Frequent Elements (heap)", url:R.LC("top-k-frequent-elements"), tags:["heap","medium"]}
     ]
   },
   {
     week: 5, title: "Graphs I — Representation, BFS/DFS, Toposort, Bipartite, DSU",
     items: [
-      {type:"video", title:"Graph Theory (BFS/DFS/Topo/Bipartite) – William Fiset playlist", url:R.fisetGraphs, tags:["graph","toposort","bipartite","cycle"]},
-      {type:"practice", title:"Number of Islands", url:R.LC("number-of-islands"), tags:["bfs","dfs","medium"]},
-      {type:"practice", title:"Clone Graph", url:R.LC("clone-graph"), tags:["graph","bfs","dfs","medium"]},
-      {type:"practice", title:"Course Schedule (Topo)", url:R.LC("course-schedule"), tags:["toposort","medium"]},
-      {type:"practice", title:"Course Schedule II (Topo)", url:R.LC("course-schedule-ii"), tags:["toposort","medium"]},
-      {type:"practice", title:"Is Graph Bipartite?", url:R.LC("is-graph-bipartite"), tags:["bfs","dfs","medium"]},
+      {type:"video", title:"William Fiset — Graph Theory playlist", url:"https://www.youtube.com/playlist?list=PLDV1Zeh2NRsDGO4--qE8yH72HFL1Km93P", tags:["theory"]},
+      {type:"ref",   title:"VisuAlgo — Graph DS • BFS/DFS", url:R.visDFS, tags:["visual"]},
+      {type:"practice", title:"Number of Islands", url:R.LC("number-of-islands"), tags:["grid","bfs/dfs","medium"]},
+      {type:"practice", title:"Clone Graph", url:R.LC("clone-graph"), tags:["graph","bfs/dfs","medium"]},
+      {type:"practice", title:"Course Schedule I/II (toposort)", url:R.LC("course-schedule"), tags:["dag","toposort","medium"]},
+      {type:"practice", title:"Is Graph Bipartite?", url:R.LC("is-graph-bipartite"), tags:["bipartite","medium"]},
       {type:"practice", title:"Redundant Connection (DSU)", url:R.LC("redundant-connection"), tags:["dsu","medium"]},
+      {type:"ref", depth:true, title:"CP-Algorithms — DSU (union-find)", url:"https://cp-algorithms.com/data_structures/disjoint_set_union.html", tags:["reference"]}
     ]
   },
   {
-    week: 6, title: "Graphs II — Shortest Paths, MST, DAG DP, (opt) SCC",
+    week: 6, title: "Graphs II — Shortest Paths, MST, DAG DP (+ CSES intro)",
     items: [
-      {type:"video", title:"Shortest Paths & MST – William Fiset / MIT 6.006", url:R.mit6006YT, tags:["dijkstra","bellman-ford","mst"]},
-      {type:"practice", title:"Network Delay Time (Dijkstra)", url:R.LC("network-delay-time"), tags:["dijkstra","graph","medium"]},
+      {type:"video", title:"MIT 6.006 / 6.046 — shortest paths & MST (audit free)", url:R.mit6046, tags:["theory"]},
+      {type:"practice", title:"Network Delay Time (Dijkstra)", url:R.LC("network-delay-time"), tags:["dijkstra","medium"]},
       {type:"practice", title:"Path With Minimum Effort (grid Dijkstra)", url:R.LC("path-with-minimum-effort"), tags:["dijkstra","grid","medium"]},
-      {type:"practice", title:"Cheapest Flights Within K Stops (BF/DP)", url:R.LC("cheapest-flights-within-k-stops"), tags:["bellman-ford","dp","medium"]},
-      {type:"practice", title:"Min Cost to Connect All Points (MST)", url:R.LC("min-cost-to-connect-all-points"), tags:["mst","kruskal","prim","medium"]},
-      {type:"practice", title:"Longest Flight Route (DAG DP, CSES)", url:R.csesLongestFlight, tags:["dag","dp","topo","cses"]},
-      {type:"practice", title:"(opt) Hamiltonian Flights (bitmask DP, CSES)", url:R.csesHamiltonian, tags:["bitmask dp","cses","hard"]},
+      {type:"practice", title:"Cheapest Flights Within K Stops (Bellman-Ford/DP)", url:R.LC("cheapest-flights-within-k-stops"), tags:["bellman-ford","medium"]},
+      {type:"practice", title:"Min Cost to Connect All Points (MST)", url:R.LC("min-cost-to-connect-all-points"), tags:["mst","kruskal/prim","medium"]},
+      {type:"practice", title:"CSES — Sorting & Searching set (pick 5)", url:R.cses, tags:["cses","set"]},
+      {type:"ref", depth:true, title:"CP-Algorithms — Dijkstra (sparse)", url:"https://cp-algorithms.com/graph/dijkstra_sparse.html", tags:["reference"]}
     ]
   },
   {
-    week: 7, title: "Dynamic Programming I — 1D, Knapsack, LIS, Interval DP",
+    week: 7, title: "Dynamic Programming I — 1D, Knapsack, LIS, Prefix/Intervals",
     items: [
-      {type:"video", title:"DP Mindset – Tushar Roy playlist", url:R.tusharDP, tags:["dp","playlist"]},
-      {type:"video", title:"freeCodeCamp — DS&A in Python (DP sections)", url:R.freeCodeCampDSAPy, tags:["dp","python"]},
-      {type:"practice", title:"Climbing Stairs", url:R.LC("climbing-stairs"), tags:["dp","easy"]},
-      {type:"practice", title:"House Robber", url:R.LC("house-robber"), tags:["dp","easy"]},
-      {type:"practice", title:"Decode Ways", url:R.LC("decode-ways"), tags:["dp","medium"]},
-      {type:"practice", title:"Coin Change (min coins)", url:R.LC("coin-change"), tags:["dp","medium"]},
-      {type:"practice", title:"Coin Change II (ways)", url:R.LC("coin-change-ii"), tags:["dp","medium"]},
-      {type:"practice", title:"Longest Increasing Subsequence", url:R.LC("longest-increasing-subsequence"), tags:["dp","bisect","medium"]},
-      {type:"practice", title:"Burst Balloons (interval DP)", url:R.LC("burst-balloons"), tags:["interval dp","hard"]},
-      {type:"practice", title:"Min Cost to Cut Stick (interval DP)", url:R.LC("minimum-cost-to-cut-a-stick"), tags:["interval dp","medium"]},
+      {type:"video", title:"Tushar Roy — DP playlist (free on YouTube)", url:"https://www.youtube.com/playlist?list=PLrmLmBdmIlpsHaNTPP_jHHDx_os9ItYXr", tags:["patterns"]},
+      {type:"practice", title:"Climbing Stairs · House Robber · Decode Ways", url:R.LC("climbing-stairs"), tags:["1D dp","easy→medium"]},
+      {type:"practice", title:"Coin Change · Coin Change II", url:R.LC("coin-change"), tags:["knapsack","medium"]},
+      {type:"practice", title:"Longest Increasing Subsequence (O(n log n))", url:R.LC("longest-increasing-subsequence"), tags:["lis","bisect","medium"]},
+      {type:"practice", title:"Min Cost to Cut Stick / Burst Balloons", url:R.LC("minimum-cost-to-cut-a-stick"), tags:["interval dp","med→hard"]},
+      {type:"ref", depth:true, title:"Sean Prashad — LeetCode patterns (index)", url:R.spPatterns, tags:["roadmap"]}
     ]
   },
   {
-    week: 8, title: "Dynamic Programming II — Grid, Tree DP, Bitmask (opt) + Wrap-Up",
+    week: 8, title: "Dynamic Programming II — Grid, Tree DP · Wrap-up & Timed Sets",
     items: [
-      {type:"video", title:"NeetCode DP + Tree/Grid selections", url:R.neetcodeChannel, tags:["dp","grid","tree"]},
-      {type:"practice", title:"Unique Paths", url:R.LC("unique-paths"), tags:["grid dp","easy"]},
-      {type:"practice", title:"Minimum Path Sum", url:R.LC("minimum-path-sum"), tags:["grid dp","medium"]},
-      {type:"practice", title:"Binary Tree Maximum Path Sum", url:R.LC("binary-tree-maximum-path-sum"), tags:["tree dp","hard"]},
-      {type:"practice", title:"Diameter of Binary Tree", url:R.LC("diameter-of-binary-tree"), tags:["tree dp","easy"]},
-      {type:"practice", title:"(opt) Hamiltonian Flights (bitmask DP, CSES)", url:R.csesHamiltonian, tags:["bitmask dp","cses","hard"]},
-      {type:"video", title:"Practice rounds — Codeforces contests page", url:R.cfContests, tags:["timed","contest"]},
-      {type:"video", title:"Practice rounds — AtCoder contests page", url:R.atcoderContests, tags:["timed","contest"]},
+      {type:"video", title:"NeetCode — grid/tree DP selections", url:R.neetcode, tags:["patterns"]},
+      {type:"practice", title:"Unique Paths · Minimum Path Sum", url:R.LC("unique-paths"), tags:["grid dp","easy→medium"]},
+      {type:"practice", title:"Diameter of Binary Tree · Max Path Sum", url:R.LC("diameter-of-binary-tree"), tags:["tree dp","easy→hard"]},
+      {type:"practice", title:"CSES — DP section (pick any 4)", url:R.cses, tags:["cses","dp"]},
+      {type:"practice", title:"Timed set: choose 1 CF/AtCoder round (Div4/ABC)", url:"https://codeforces.com/contests", tags:["timed"]},
+      {type:"ref",   title:"USACO Guide — topic roadmaps & graded problems", url:R.usacoguide, tags:["roadmap","graded"]}
     ]
   }
 ];
 
-/* ---------- Rendering ---------- */
+/* ---------- Rendering & interactions ---------- */
 const $weeks = document.getElementById("weeks");
-const STORAGE = "dsa_plan_progress_v1";
+const STORAGE = "dsa_pro_plan_progress_v2";
 
-function loadProgress(){
-  try{ return JSON.parse(localStorage.getItem(STORAGE) || "{}"); }catch{ return {}; }
-}
+function loadProgress(){ try{return JSON.parse(localStorage.getItem(STORAGE)||"{}");}catch{return{}} }
 function saveProgress(p){ localStorage.setItem(STORAGE, JSON.stringify(p)); }
-
 let progress = loadProgress();
-
-function itemId(week, idx){ return `w${week}i${idx}`; }
+const itemId = (w,i)=>`w${w}i${i}`;
 
 function render(){
   $weeks.innerHTML = "";
   const q = document.getElementById("search").value.trim().toLowerCase();
   const showVideo = document.getElementById("flt-video").checked;
   const showPractice = document.getElementById("flt-practice").checked;
+  const showRef = document.getElementById("flt-ref").checked;
+  const showDepth = document.getElementById("show-depth").checked;
 
   PLAN.forEach(({week, title, items})=>{
-    // filter items by type/search
-    const vis = items.map((it, i)=>{
-      const typeOk = (it.type==="video" && showVideo) || (it.type==="practice" && showPractice);
-      const hay = (it.title+" "+(it.tags||[]).join(" ")+ " "+title).toLowerCase();
+    const vis = items.map(it=>{
+      const typeOk = (it.type==="video"&&showVideo)||(it.type==="practice"&&showPractice)||(it.type==="ref"&&showRef);
+      const depthOk = showDepth || !it.depth;
+      const hay = (it.title+" "+(it.tags||[]).join(" ")+" "+title).toLowerCase();
       const qOk = !q || hay.includes(q);
-      return typeOk && qOk;
+      return typeOk && depthOk && qOk;
     });
-    if(!vis.some(x=>x)) return;
+    if(!vis.some(Boolean)) return;
 
     const details = document.createElement("details");
-    details.className = "week";
-    details.open = true;
+    details.className="week"; details.open=true;
 
     const sum = document.createElement("summary");
-    sum.className = "summary";
-    sum.innerHTML = `
-      <h2>Week ${week}: ${title}</h2>
-      <span class="meta">
-        <span class="badge">${items.filter((_,i)=>vis[i]).length} items</span>
-        <span class="badge">${checkedCount(items, week, vis)} done</span>
-      </span>`;
+    sum.className="summary";
+    sum.innerHTML = `<h2>${week===0?"Week 0 (Optional)":"Week "+week}: ${title}</h2>
+      <span class="meta"><span class="badge">${items.filter((_,i)=>vis[i]).length} items</span>
+      <span class="badge">${checkedCount(items, week, vis)} done</span></span>`;
     details.appendChild(sum);
 
-    const ul = document.createElement("div");
-    ul.className = "list";
-    items.forEach((it, i)=>{
+    const list = document.createElement("div"); list.className="list";
+    items.forEach((it,i)=>{
       if(!vis[i]) return;
-      const id = itemId(week, i);
+      const id = itemId(week,i);
       const done = !!progress[id];
-
       const li = document.createElement("div");
-      li.className = "item";
-      li.dataset.id = id;
+      li.className="item";
 
-      const cls = it.type === "video" ? "video" : "practice";
+      const cls = it.type==="video"?"video":(it.type==="practice"?"practice":"ref");
       const tags = (it.tags||[]).map(t=>`<span class="badge">${t}</span>`).join(" ");
+      const depth = it.depth?`<span class="badge" title="Optional depth item">depth</span>`:"";
 
       li.innerHTML = `
         <div class="row">
@@ -277,105 +295,68 @@ function render(){
             <span class="type ${cls}">${it.type}</span>
           </label>
           <a class="title ${done?"strike":""}" href="${it.url}" target="_blank" rel="noopener">${it.title}</a>
-          <div class="actions">
-            <a class="btn" href="${it.url}" target="_blank" rel="noopener" title="Open link">Open</a>
+          <div style="margin-left:auto;display:flex;gap:8px">
+            <a class="btn" href="${it.url}" target="_blank" rel="noopener">Open</a>
           </div>
         </div>
-        <div class="row">
-          <span class="muted">${tags}</span>
-        </div>
+        <div class="row"><span class="muted">${tags} ${depth}</span></div>
       `;
       li.querySelector('input[type="checkbox"]').addEventListener("change",(e)=>{
-        progress[id] = e.target.checked;
-        saveProgress(progress);
-        render(); // refresh counts & strike-through
+        progress[id]=e.target.checked; saveProgress(progress); render();
       });
-      ul.appendChild(li);
+      list.appendChild(li);
     });
 
-    details.appendChild(ul);
+    details.appendChild(list);
     $weeks.appendChild(details);
   });
 }
 
 function checkedCount(items, week, vis){
-  let c=0;
-  items.forEach((_,i)=>{ if(vis[i] && progress[itemId(week,i)]) c++; });
-  return c;
+  let c=0; items.forEach((_,i)=>{ if(vis[i] && progress[itemId(week,i)]) c++; }); return c;
 }
 
-/* ---------- Controls ---------- */
-const debounce = (fn,ms=200)=>{let t; return (...a)=>{clearTimeout(t); t=setTimeout(()=>fn(...a),ms);}};
+const debounce=(fn,ms=180)=>{let t; return (...a)=>{clearTimeout(t); t=setTimeout(()=>fn(...a),ms);}};
 
-document.getElementById("search").addEventListener("input",debounce(render,150));
-document.getElementById("flt-video").addEventListener("change",render);
-document.getElementById("flt-practice").addEventListener("change",render);
-
-document.getElementById("expand-all").addEventListener("click",()=>{
-  document.querySelectorAll("details.week").forEach(d=>d.open=true);
+document.getElementById("search").addEventListener("input",debounce(render));
+["flt-video","flt-practice","flt-ref","show-depth"].forEach(id=>{
+  document.getElementById(id).addEventListener("change",render);
 });
-document.getElementById("collapse-all").addEventListener("click",()=>{
-  document.querySelectorAll("details.week").forEach(d=>d.open=false);
-});
+document.getElementById("expand-all").addEventListener("click",()=>{document.querySelectorAll("details.week").forEach(d=>d.open=true)});
+document.getElementById("collapse-all").addEventListener("click",()=>{document.querySelectorAll("details.week").forEach(d=>d.open=false)});
 
 document.getElementById("next").addEventListener("click",()=>{
   const q = document.getElementById("search").value.trim().toLowerCase();
   const showVideo = document.getElementById("flt-video").checked;
   const showPractice = document.getElementById("flt-practice").checked;
+  const showRef = document.getElementById("flt-ref").checked;
+  const showDepth = document.getElementById("show-depth").checked;
 
-  for(const {week, title, items} of PLAN){
+  for(const {week,title,items} of PLAN){
     for(let i=0;i<items.length;i++){
-      const it = items[i];
-      const id = itemId(week,i);
-      const typeOk = (it.type==="video" && showVideo) || (it.type==="practice" && showPractice);
-      const hay = (it.title+" "+(it.tags||[]).join(" ")+ " "+title).toLowerCase();
-      const qOk = !q || hay.includes(q);
-      if(typeOk && qOk && !progress[id]){
-        window.open(it.url,"_blank","noopener");
-        return;
-      }
+      const it = items[i]; const id=itemId(week,i);
+      const typeOk=(it.type==="video"&&showVideo)||(it.type==="practice"&&showPractice)||(it.type==="ref"&&showRef);
+      const depthOk=showDepth||!it.depth;
+      const hay=(it.title+" "+(it.tags||[]).join(" ")+" "+title).toLowerCase();
+      const qOk=!q||hay.includes(q);
+      if(typeOk&&depthOk&&qOk&&!progress[id]){ window.open(it.url,"_blank","noopener"); return; }
     }
   }
-  alert("No remaining visible items. Nice work!");
+  alert("No remaining visible items. Great work.");
 });
 
 document.getElementById("export").addEventListener("click",()=>{
-  const blob = new Blob([JSON.stringify(progress,null,2)],{type:"application/json"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "dsa_progress.json";
-  a.click();
-  URL.revokeObjectURL(a.href);
+  const blob=new Blob([JSON.stringify(progress,null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="dsa_progress.json"; a.click(); URL.revokeObjectURL(a.href);
 });
-
 document.getElementById("import").addEventListener("click",async ()=>{
-  const inp = document.createElement("input");
-  inp.type = "file"; inp.accept="application/json";
-  inp.onchange = async () => {
-    const file = inp.files[0]; if(!file) return;
-    try{
-      const text = await file.text();
-      const data = JSON.parse(text);
-      if(typeof data === "object"){ progress = data; saveProgress(progress); render(); }
-      else alert("Invalid file.");
-    }catch{ alert("Could not read file."); }
-  };
+  const inp=document.createElement("input"); inp.type="file"; inp.accept="application/json";
+  inp.onchange=async()=>{ const f=inp.files?.[0]; if(!f) return; try{ const t=await f.text(); const data=JSON.parse(t); if(typeof data==="object"){progress=data; saveProgress(progress); render();} else alert("Invalid file.");}catch{alert("Could not read file.");}};
   inp.click();
 });
+document.getElementById("reset").addEventListener("click",()=>{ if(confirm("Clear all progress?")){progress={}; saveProgress(progress); render();} });
 
-document.getElementById("reset").addEventListener("click",()=>{
-  if(confirm("Clear all progress?")){
-    progress = {}; saveProgress(progress); render();
-  }
-});
-
-window.addEventListener("keydown",(e)=>{
-  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="k"){
-    e.preventDefault(); document.getElementById("search").focus();
-  }
-});
-
-/* ---------- Boot ---------- */
+window.addEventListener("keydown",(e)=>{ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault(); document.getElementById("search").focus();}});
 render();
 </script>
 </body>
