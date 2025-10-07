@@ -1,378 +1,755 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DSA Masterplan (Free) — 8 Weeks</title>
-  <style>
-    :root {
-      --bg:#0b0f14; --card:#111825; --ink:#e8eef8; --muted:#9fb0c7;
-      --accent:#58a6ff; --ok:#22c55e; --warn:#f59e0b;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial;background:var(--bg);color:var(--ink)}
-    header{position:sticky;top:0;z-index:1;background:linear-gradient(180deg,var(--bg),rgba(11,15,20,.6));backdrop-filter: blur(6px);padding:18px 16px;border-bottom:1px solid #1c2432}
-    h1{margin:0 0 6px;font-size:22px}
-    .sub{color:var(--muted);font-size:14px}
-    main{padding:18px 14px;max-width:1100px;margin:auto}
-    .week{border:1px solid #1c2432;border-radius:14px;background:var(--card);margin:14px 0;overflow:hidden}
-    details[open] summary .arrow{transform:rotate(90deg)}
-    summary{cursor:pointer;list-style:none;padding:14px 16px;display:flex;align-items:center;gap:10px}
-    summary:hover{background:#0e1522}
-    .arrow{transition:.15s transform}
-    .badge{margin-left:auto;border:1px solid #293244;padding:3px 8px;border-radius:999px;color:var(--muted);font-size:12px}
-    .grid{display:grid;gap:12px;padding:0 16px 16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    .card{border:1px solid #1c2432;border-radius:12px;padding:12px;background:#0f1723}
-    .title{font-weight:600;margin:0 0 6px}
-    .muted{color:var(--muted);font-size:13px;margin:0 0 8px}
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .links a{display:inline-block;margin:6px 8px 0 0;font-size:14px}
-    .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .dot{width:10px;height:10px;border-radius:50%;background:#1f2a3a;display:inline-block;margin-right:6px}
-    .ok{background:var(--ok)} .warn{background:var(--warn)}
-    .controls{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-    button{background:#0d1420;border:1px solid #203049;color:var(--ink);border-radius:10px;padding:8px 12px;cursor:pointer}
-    button:hover{background:#0f1a2a}
-    .tiny{font-size:12px;color:var(--muted);margin-top:6px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Professional 8-Week DSA Mastery Planner</title>
+<meta name="description" content="A professional, interactive 8-week planner for mastering Data Structures & Algorithms with exact free videos and practice links." />
+<link rel="icon" href="data:," />
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#0f1620; --card:#0e1520; --text:#e6edf3; --muted:#94a3b8; --border:#1f2937;
+    --brand:#60a5fa; --brand2:#22c55e; --chip:#0e1a2a; --chip-b:#334155; --accent:#1e293b;
+  }
+  [data-theme="light"]{
+    --bg:#f6f9fc; --panel:#ffffff; --card:#ffffff; --text:#0c1116; --muted:#475569; --border:#e5ecf3;
+    --brand:#0b6cff; --brand2:#0e9f6e; --chip:#eef5ff; --chip-b:#d8e5ff; --accent:#f1f5f9;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--text);font:500 16px/1.55 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+  a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+  .app{display:grid;grid-template-columns:320px 1fr;gap:18px;max-width:1400px;margin:0 auto;padding:18px;height:100%}
+  .sidebar,.main{background:var(--panel);border:1px solid var(--border);border-radius:16px}
+  .sidebar{display:flex;flex-direction:column;overflow:auto}
+  .main{display:flex;flex-direction:column;overflow:auto}
+  header.top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
+  .title{font-weight:800}
+  .badge{font-size:12px;padding:4px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--chip-b);color:var(--muted)}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid var(--border)}
+  .controls input,.controls select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;outline:none}
+  .btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;cursor:pointer}
+  .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#041018;border:0}
+  .list{padding:10px}
+  .week-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px;cursor:pointer}
+  .week-card.active{outline:2px solid var(--brand)}
+  .progress-sm{height:6px;background:var(--accent);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:8px}
+  .bar{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2))}
+  .content{padding:18px 22px;display:grid;gap:16px}
+  .section{border:1px solid var(--border);border-radius:14px;background:var(--card)}
+  .section>header{padding:12px 14px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center;justify-content:space-between}
+  .section .body{padding:12px 14px}
+  .step{border:1px dashed var(--border);border-radius:12px;padding:12px;margin:10px 0}
+  .step-head{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;cursor:pointer}
+  .chip{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--chip-b);color:var(--muted)}
+  .step h4{margin:0}
+  .meta{color:var(--muted);font-size:13px}
+  .done{display:flex;align-items:center;gap:6px}
+  .step-body{display:none;margin-top:12px}
+  .grid{display:grid;gap:10px}
+  .grid-2{grid-template-columns:1fr 1fr}
+  .links a{display:flex;gap:10px;border:1px solid var(--border);padding:10px;border-radius:10px;background:var(--accent)}
+  .links small{color:var(--muted)}
+  .footer{position:sticky;bottom:0;padding:10px 12px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.05),transparent)}
+  .progress-lg{flex:1;height:10px;border:1px solid var(--border);background:var(--accent);border-radius:999px;overflow:hidden}
+  .bar{height:100%;background:linear-gradient(90deg,var(--brand),var(--brand2))}
+  .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;padding:2px 6px;border:1px solid var(--border);border-radius:6px;background:var(--accent)}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .hide{display:none}
+  .planner input{width:160px}
+  .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .tag{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--border);background:var(--accent)}
+  @media (max-width: 980px){ .app{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr} }
+  @media print{
+    .app{display:block;padding:0}
+    .sidebar,.footer,.controls,.planner{display:none}
+    .main{border:0}
+    .content{padding:0}
+    .section{break-inside:avoid}
+  }
+</style>
 </head>
 <body>
-<header>
-  <h1>8-Week DSA Masterplan (Free)</h1>
-  <div class="sub">Each topic includes a tutorial video (concepts) + a few practice links. Click any item to open resources in new tabs.</div>
-  <div class="controls">
-    <button id="openWeek">Open this week’s tutorials</button>
-    <button id="markAll">Mark this week done</button>
-    <span class="tiny">Progress is saved locally in your browser.</span>
-  </div>
-</header>
-
-<main id="app">
-  <!-- WEEK 1 -->
-  <section class="week" data-week="1">
-    <details open>
-      <summary><span class="arrow">▶</span><strong>Week 1 — Fundamentals</strong>
-        <span class="badge">Big-O, Arrays, Strings, Hashing</span>
-      </summary>
-      <div class="grid">
-        <div class="card" data-key="big-o">
-          <div class="title">Big-O & Complexity</div>
-          <p class="muted">How to reason about time/space in interviews.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=rv_ZacJYRFA">Tutorial video (NeetCode)</a>
-            <a target="_blank" href="https://leetcode.com/explore/featured/card/complexity-analysis/">Practice set</a>
-          </div>
-        </div>
-        <div class="card" data-key="arrays">
-          <div class="title">Arrays</div>
-          <p class="muted">Static vs dynamic arrays, index math, cache behavior.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=PEnFFiQe1pM">Tutorial video (Dynamic/Static Arrays — William Fiset)</a>
-            <a target="_blank" href="https://leetcode.com/problems/two-sum/">Two Sum</a>
-            <a target="_blank" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">Best Time to Buy & Sell Stock</a>
-          </div>
-        </div>
-        <div class="card" data-key="strings">
-          <div class="title">Strings</div>
-          <p class="muted">How strings are stored; basics that power later string algos.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=Bf8a6IC1dE8">Tutorial video (mycodeschool)</a>
-            <a target="_blank" href="https://leetcode.com/problems/valid-anagram/">Valid Anagram</a>
-            <a target="_blank" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">Longest Substring w/o Repeating</a>
-          </div>
-        </div>
-        <div class="card" data-key="hashing">
-          <div class="title">Hash Tables</div>
-          <p class="muted">Hash functions, collisions, separate chaining vs open addressing.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=T9gct6Dx-jo">Tutorial video (Separate Chaining — William Fiset)</a>
-            <a target="_blank" href="https://leetcode.com/problems/group-anagrams/">Group Anagrams</a>
-            <a target="_blank" href="https://leetcode.com/problems/two-sum/">Two Sum</a>
-          </div>
-        </div>
+<div class="app" id="app" data-theme="dark">
+  <!-- Sidebar -->
+  <aside class="sidebar" aria-label="Weeks navigation">
+    <header class="top">
+      <div class="title">DSA Mastery Planner</div>
+      <div class="row">
+        <button class="btn" id="themeToggle" title="Toggle theme">Theme</button>
+        <span class="badge" id="streakBadge" title="Days with any completion recorded">Streak: 0</span>
       </div>
-    </details>
-  </section>
+    </header>
 
-  <!-- WEEK 2 -->
-  <section class="week" data-week="2">
-    <details>
-      <summary><span class="arrow">▶</span><strong>Week 2 — Pointers, Windows & Search</strong>
-        <span class="badge">Two Pointers, Sliding Window, Binary Search</span>
-      </summary>
-      <div class="grid">
-        <div class="card" data-key="two-pointers">
-          <div class="title">Two Pointers</div>
-          <p class="muted">When to scan from both ends vs slow/fast pointers.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=9kdHxplyl5I">Tutorial video (Intro to 2-Pointers — Striver)</a>
-            <a target="_blank" href="https://leetcode.com/problems/3sum/">3Sum</a>
-            <a target="_blank" href="https://leetcode.com/problems/container-with-most-water/">Container With Most Water</a>
-          </div>
-        </div>
-        <div class="card" data-key="sliding-window">
-          <div class="title">Sliding Window</div>
-          <p class="muted">Fixed vs variable windows; counting & constraints.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=dOonV4byDEg">Tutorial video (Sliding Window — concept)</a>
-            <a target="_blank" href="https://leetcode.com/problems/minimum-window-substring/">Minimum Window Substring</a>
-            <a target="_blank" href="https://leetcode.com/problems/longest-repeating-character-replacement/">Character Replacement</a>
-          </div>
-        </div>
-        <div class="card" data-key="binary-search">
-          <div class="title">Binary Search</div>
-          <p class="muted">Core template, invariants, off-by-one traps.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=j5uXyPJ0Pew">Tutorial video (mycodeschool)</a>
-            <a target="_blank" href="https://leetcode.com/problems/binary-search/">Binary Search</a>
-            <a target="_blank" href="https://leetcode.com/problems/search-in-rotated-sorted-array/">Search in Rotated Sorted Array</a>
-          </div>
-        </div>
-      </div>
-    </details>
-  </section>
+    <div class="controls">
+      <input id="q" type="search" placeholder="Search (topic/problem/video)" aria-label="Search"/>
+      <select id="topic">
+        <option value="all">All topics</option>
+        <option value="foundations">Foundations</option>
+        <option value="arrays">Arrays/Hashing</option>
+        <option value="strings">Strings</option>
+        <option value="twopointers">Two Pointers</option>
+        <option value="sliding">Sliding Window</option>
+        <option value="binarysearch">Binary Search</option>
+        <option value="stackqueue">Stack/Queue</option>
+        <option value="monotonic">Monotonic</option>
+        <option value="trees">Trees/BST</option>
+        <option value="backtracking">Backtracking</option>
+        <option value="heap">Heap/PQ</option>
+        <option value="sorting">Sorting</option>
+        <option value="intervals">Intervals/Greedy</option>
+        <option value="graphs">Graphs</option>
+        <option value="toposort">Toposort</option>
+        <option value="shortest">Shortest Paths</option>
+        <option value="dsu">Union-Find/MST</option>
+        <option value="dp">Dynamic Programming</option>
+        <option value="trie">Trie</option>
+        <option value="bit">Bit Manipulation</option>
+        <option value="stringalgs">String Algorithms</option>
+        <option value="advanced">Advanced</option>
+      </select>
+      <select id="difficulty">
+        <option value="all">All difficulties</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <button class="btn" id="expandAll">Expand all</button>
+      <button class="btn" id="collapseAll">Collapse all</button>
+      <button class="btn" id="exportBtn" title="Export progress JSON">Export</button>
+      <button class="btn" id="importBtn" title="Import progress JSON">Import</button>
+      <input id="importFile" class="hide" type="file" accept="application/json" />
+    </div>
 
-  <!-- WEEK 3 -->
-  <section class="week" data-week="3">
-    <details>
-      <summary><span class="arrow">▶</span><strong>Week 3 — Stacks, Queues & Monotonic Structures</strong>
-        <span class="badge">Stack, Queue, Monotonic Stack/Deque</span>
-      </summary>
-      <div class="grid">
-        <div class="card" data-key="stack">
-          <div class="title">Stacks</div>
-          <p class="muted">LIFO; parsing, undo, recursion frames.</p>
-          <div class="links">
-            <a target="_blank" href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">Brief concept refresher</a>
-            <a target="_blank" href="https://leetcode.com/problems/valid-parentheses/">Valid Parentheses</a>
-            <a target="_blank" href="https://leetcode.com/problems/min-stack/">Min Stack</a>
-          </div>
-        </div>
-        <div class="card" data-key="queue">
-          <div class="title">Queues</div>
-          <p class="muted">FIFO; circular buffers, BFS frontier.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=KxzhEQ-zpDc">Tutorial video (Queue Intro — William Fiset)</a>
-            <a target="_blank" href="https://leetcode.com/problems/number-of-recent-calls/">Number of Recent Calls</a>
-            <a target="_blank" href="https://leetcode.com/problems/implement-queue-using-stacks/">Implement Queue Using Stacks</a>
-          </div>
-        </div>
-        <div class="card" data-key="monotonic">
-          <div class="title">Monotonic Stack / Deque</div>
-          <p class="muted">Maintain min/max or next-greater in linear time.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=Dq_ObZwTY_Q">Tutorial video (Monotonic Stack — concept)</a>
-            <a target="_blank" href="https://leetcode.com/problems/daily-temperatures/">Daily Temperatures</a>
-            <a target="_blank" href="https://leetcode.com/problems/sliding-window-maximum/">Sliding Window Maximum</a>
-          </div>
-        </div>
-      </div>
-    </details>
-  </section>
+    <div class="list" id="weekList" role="navigation" aria-live="polite"></div>
 
-  <!-- WEEK 4 -->
-  <section class="week" data-week="4">
-    <details>
-      <summary><span class="arrow">▶</span><strong>Week 4 — Trees & Heaps</strong>
-        <span class="badge">BST, Traversals, Priority Queues</span>
-      </summary>
-      <div class="grid">
-        <div class="card" data-key="bst">
-          <div class="title">Binary Search Trees</div>
-          <p class="muted">BST property, search/insert/delete basics.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=pYT9F8_LFTM">Tutorial video (BST Intro — mycodeschool)</a>
-            <a target="_blank" href="https://leetcode.com/problems/validate-binary-search-tree/">Validate BST</a>
-            <a target="_blank" href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">Kth Smallest in BST</a>
-          </div>
+    <div class="planner section" style="margin:10px">
+      <header>
+        <div>Day-by-Day Planner</div>
+      </header>
+      <div class="body">
+        <div class="row">
+          <label for="startDate">Start</label>
+          <input id="startDate" type="date"/>
+          <label for="hours">Hours/day</label>
+          <input id="hours" type="number" min="0.5" max="6" step="0.5" value="2" />
+          <button class="btn primary" id="makePlan">Generate</button>
         </div>
-        <div class="card" data-key="traversals">
-          <div class="title">Tree Traversals</div>
-          <p class="muted">BFS level order; DFS preorder/inorder/postorder.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=gm8DUJJhmY4">Tutorial video (DFS Traversals — mycodeschool)</a>
-            <a target="_blank" href="https://leetcode.com/problems/binary-tree-level-order-traversal/">Level Order Traversal</a>
-            <a target="_blank" href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">Max Depth</a>
-          </div>
-        </div>
-        <div class="card" data-key="heaps">
-          <div class="title">Heaps / Priority Queues</div>
-          <p class="muted">Binary heap invariant; common ops.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=HCEr35qpawQ">Tutorial video (PQ: Min/Max Heaps — William Fiset)</a>
-            <a target="_blank" href="https://leetcode.com/problems/top-k-frequent-elements/">Top-K Frequent Elements</a>
-            <a target="_blank" href="https://leetcode.com/problems/kth-largest-element-in-an-array/">Kth Largest in Array</a>
-          </div>
-        </div>
+        <div id="planOut" class="meta" style="margin-top:8px"></div>
       </div>
-    </details>
-  </section>
+    </div>
+  </aside>
 
-  <!-- WEEK 5 -->
-  <section class="week" data-week="5">
-    <details>
-      <summary><span class="arrow">▶</span><strong>Week 5 — Graphs I</strong>
-        <span class="badge">BFS/DFS, Connectivity</span>
-      </summary>
-      <div class="grid">
-        <div class="card" data-key="bfs">
-          <div class="title">BFS</div>
-          <p class="muted">Shortest paths in unweighted graphs; layering.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=pcKY4hjVITc">Tutorial video (BFS — William Fiset)</a>
-            <a target="_blank" href="https://leetcode.com/problems/number-of-islands/">Number of Islands</a>
-            <a target="_blank" href="https://leetcode.com/problems/rotting-oranges/">Rotting Oranges</a>
-          </div>
-        </div>
-        <div class="card" data-key="dfs">
-          <div class="title">DFS</div>
-          <p class="muted">Traversal, components, cycle detection.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=7fujbpJ0LB4">Tutorial video (DFS — William Fiset)</a>
-            <a target="_blank" href="https://leetcode.com/problems/clone-graph/">Clone Graph</a>
-            <a target="_blank" href="https://leetcode.com/problems/course-schedule/">Course Schedule (cycle)</a>
-          </div>
-        </div>
+  <!-- Main -->
+  <main class="main">
+    <header class="top">
+      <div>
+        <div class="title" id="weekTitle">Select a week</div>
+        <div class="meta">Click a step to expand. Mark done when you finish videos + practice.</div>
       </div>
-    </details>
-  </section>
+      <span class="badge" id="overallPct">0% complete</span>
+    </header>
 
-  <!-- WEEK 6 -->
-  <section class="week" data-week="6">
-    <details>
-      <summary><span class="arrow">▶</span><strong>Week 6 — Graphs II</strong>
-        <span class="badge">Shortest Paths, Union-Find, MST</span>
-      </summary>
-      <div class="grid">
-        <div class="card" data-key="dijkstra">
-          <div class="title">Dijkstra (no negative edges)</div>
-          <p class="muted">Single-source shortest path with a min-heap.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=pSqmAO-m7Lk">Tutorial video (William Fiset)</a>
-            <a target="_blank" href="https://leetcode.com/problems/network-delay-time/">Network Delay Time</a>
+    <div class="content">
+      <section class="section">
+        <header>
+          <div>Steps</div>
+          <div class="row">
+            <span class="badge">Keyboard: <span class="kbd">/</span> search, <span class="kbd">n</span> next, <span class="kbd">p</span> prev</span>
+            <button class="btn" id="openNext">Open next step</button>
           </div>
-        </div>
-        <div class="card" data-key="union-find">
-          <div class="title">Disjoint Set (Union-Find)</div>
-          <p class="muted">Union by rank + path compression.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=ibjEGG7ylHk">Tutorial video (Intro — William Fiset)</a>
-            <a target="_blank" href="https://leetcode.com/problems/number-of-provinces/">Number of Provinces</a>
-            <a target="_blank" href="https://leetcode.com/problems/redundant-connection/">Redundant Connection</a>
-          </div>
-        </div>
-        <div class="card" data-key="mst">
-          <div class="title">Minimum Spanning Trees</div>
-          <p class="muted">Kruskal (greedy + DSU) / Prim (heap).</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=JZBQLXgSGfs">Kruskal’s (William Fiset)</a>
-            <a target="_blank" href="https://www.youtube.com/watch?v=jsmMtJpPnhU">Prim’s (William Fiset)</a>
-            <a target="_blank" href="https://leetcode.com/problems/min-cost-to-connect-all-points/">Min Cost to Connect All Points</a>
-          </div>
-        </div>
-      </div>
-    </details>
-  </section>
+        </header>
+        <div class="body" id="steps"></div>
+      </section>
 
-  <!-- WEEK 7 -->
-  <section class="week" data-week="7">
-    <details>
-      <summary><span class="arrow">▶</span><strong>Week 7 — Dynamic Programming I</strong>
-        <span class="badge">Templates, Classic 1-D DP</span>
-      </summary>
-      <div class="grid">
-        <div class="card" data-key="dp-overview">
-          <div class="title">DP Overview</div>
-          <p class="muted">Memo vs tabulation, state & transition.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=P8Xa2BitN3I">Tutorial video (freeCodeCamp DP Course)</a>
-            <a target="_blank" href="https://leetcode.com/problems/climbing-stairs/">Climbing Stairs</a>
-            <a target="_blank" href="https://leetcode.com/problems/coin-change/">Coin Change</a>
-          </div>
+      <section class="section">
+        <header><div>Notes</div></header>
+        <div class="body">
+          <ul class="meta" style="margin:0 0 0 18px">
+            <li>Default cadence: ~90–120 minutes/day, 6 days/week; Sunday review/contest optional.</li>
+            <li>For each step: watch → outline → implement twice → practice set → brief retrospective.</li>
+            <li>Revisit any “hard” items after 24h / 7d / 30d. The planner helps schedule revisits.</li>
+          </ul>
         </div>
-        <div class="card" data-key="lis">
-          <div class="title">LIS (n log n)</div>
-          <p class="muted">Patience sorting + binary search trick.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=CE2b_-XfVDk">Tutorial video (Tushar Roy)</a>
-            <a target="_blank" href="https://leetcode.com/problems/longest-increasing-subsequence/">LIS</a>
-          </div>
-        </div>
-        <div class="card" data-key="house-robber">
-          <div class="title">House Robber pattern</div>
-          <p class="muted">Choose/skip with rolling state.</p>
-          <div class="links">
-            <a target="_blank" href="https://leetcode.com/problems/house-robber/">House Robber</a>
-            <a target="_blank" href="https://leetcode.com/problems/house-robber-ii/">House Robber II</a>
-          </div>
-        </div>
-      </div>
-    </details>
-  </section>
+      </section>
+    </div>
 
-  <!-- WEEK 8 -->
-  <section class="week" data-week="8">
-    <details>
-      <summary><span class="arrow">▶</span><strong>Week 8 — Strings & Tries</strong>
-        <span class="badge">Edit Distance, KMP, Trie</span>
-      </summary>
-      <div class="grid">
-        <div class="card" data-key="edit-distance">
-          <div class="title">Edit Distance (Levenshtein)</div>
-          <p class="muted">2-D DP; alignment intuition.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=We3YDTzNXEk">Tutorial video (Tushar Roy)</a>
-            <a target="_blank" href="https://leetcode.com/problems/edit-distance/">Edit Distance</a>
-          </div>
-        </div>
-        <div class="card" data-key="kmp">
-          <div class="title">KMP (Prefix Function)</div>
-          <p class="muted">Failure links / LPS array to skip work.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=GTJr8OvyEVQ">Tutorial video (Tushar Roy)</a>
-            <a target="_blank" href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/">Implement strStr()</a>
-          </div>
-        </div>
-        <div class="card" data-key="trie">
-          <div class="title">Trie (Prefix Tree)</div>
-          <p class="muted">Insert/search; autocomplete ideas.</p>
-          <div class="links">
-            <a target="_blank" href="https://www.youtube.com/watch?v=O6sge-7uo5Q">Tutorial video (Abdul Bari)</a>
-            <a target="_blank" href="https://leetcode.com/problems/implement-trie-prefix-tree/">Implement Trie</a>
-            <a target="_blank" href="https://leetcode.com/problems/design-add-and-search-words-data-structure/">Add & Search Words</a>
-          </div>
-        </div>
-      </div>
-    </details>
-  </section>
-</main>
+    <div class="footer">
+      <div class="progress-lg"><div class="bar" id="overallBar" style="width:0%"></div></div>
+      <button class="btn" onclick="window.print()">Print</button>
+      <button class="btn" id="reset">Reset</button>
+    </div>
+  </main>
+</div>
 
 <script>
-  // simple local progress
-  const done = JSON.parse(localStorage.getItem('dsa_done')||'{}');
-  document.querySelectorAll('.card').forEach(card=>{
-    const k = card.dataset.key;
-    const dot = document.createElement('span'); dot.className='dot'+(done[k]?' ok':''); card.prepend(dot);
-    card.addEventListener('dblclick', ()=>{ done[k]=!done[k]; dot.classList.toggle('ok',done[k]); localStorage.setItem('dsa_done',JSON.stringify(done)); });
-  });
+/* ---------- Curriculum (exact video links + direct practice) ---------- */
 
-  // helper: open all tutorials of the first open week
-  document.getElementById('openWeek').onclick=()=>{
-    const open = document.querySelector('section.week details[open]');
-    if(!open) return;
-    const firstLinks=[...open.parentElement.querySelectorAll('.card .links a:first-child')];
-    firstLinks.forEach(a=>window.open(a.href,'_blank'));
-  };
-  document.getElementById('markAll').onclick=()=>{
-    const open = document.querySelector('section.week details[open]');
-    if(!open) return;
-    [...open.parentElement.querySelectorAll('.card')].forEach(card=>{
-      const k=card.dataset.key; if(!k) return;
-      done[k]=true; card.querySelector('.dot').classList.add('ok');
-    });
-    localStorage.setItem('dsa_done',JSON.stringify(done));
-  };
+/* FIX: robust LeetCode link builder (removes any extra slashes users might pass) */
+const LINK_BUILDER = {
+  LC: (slug) => {
+    const clean = String(slug).replace(/^\/+|\/+$/g,''); // trim leading/trailing slashes
+    return `https://leetcode.com/problems/${clean}/`;
+  },
+  CSES: "https://cses.fi/problemset/",
+};
+
+/* Each step:
+    id, tag (topic), title, est (minutes), diff: 'easy'|'medium'|'hard'|'mix'
+    videos: [{t,u}], practice: [{t,u}]
+*/
+const PLAN = [
+  { id:"w1", title:"Week 1 — Foundations, Arrays, Strings, Hashing", days:"Mon–Sat study",
+    steps:[
+      { id:"w1s1", tag:"foundations", title:"Asymptotics: Big-O, time/space, growth rates", est:40, diff:"easy",
+        videos:[
+          {t:"Big-O for Coding Interviews — NeetCode", u:"https://www.youtube.com/watch?v=BgLTDT03QtU"},
+          {t:"Intro to Big-O & Complexity — CS Dojo", u:"https://www.youtube.com/watch?v=D6xkbGLQesk"}
+        ],
+        practice:[{t:"Cheatsheet: Big-O (free)", u:"https://neetcode.io/courses/lessons/big-o-notation"}]
+      },
+      { id:"w1s2", tag:"arrays", title:"Maps/Sets: Two Sum, Valid Anagram, Group Anagrams", est:60, diff:"easy",
+        videos:[
+          {t:"Arrays & Hashing (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=A2gMbc4-TP0"}, // Added introductory video
+          {t:"Two Sum — LeetCode 1 (NeetCode)", u:"https://www.youtube.com/watch?v=KLlXCFG5TnA"},
+          {t:"Valid Anagram — LeetCode 242 (NeetCode)", u:"https://www.youtube.com/watch?v=9UtInBqnCgA"},
+          {t:"Group Anagrams — LeetCode 49 (NeetCode)", u:"https://www.youtube.com/watch?v=vzdNOK2oB2E"}
+        ],
+        practice:[
+          {t:"LeetCode 1. Two Sum", u:LINK_BUILDER.LC("two-sum")},
+          {t:"LeetCode 242. Valid Anagram", u:LINK_BUILDER.LC("valid-anagram")},
+          {t:"LeetCode 49. Group Anagrams", u:LINK_BUILDER.LC("group-anagrams")}
+        ]
+      },
+      { id:"w1s3", tag:"strings", title:"Encode/Decode strings; frequency & prefix tricks", est:55, diff:"medium",
+        videos:[
+          {t:"Strings (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=W0-D48eWbWk"}, // Added introductory video
+          {t:"Encode/Decode Strings — LeetCode 271 (NeetCode)", u:"https://www.youtube.com/watch?v=B1k_sxOSgv8"},
+          {t:"Product of Array Except Self — LeetCode 238 (NeetCode)", u:"https://www.youtube.com/watch?v=bNvIQI2wAjk"}
+        ],
+        practice:[
+          {t:"LeetCode 271. Encode & Decode Strings", u:LINK_BUILDER.LC("encode-and-decode-strings")},
+          {t:"LeetCode 238. Product of Array Except Self", u:LINK_BUILDER.LC("product-of-array-except-self")}
+        ]
+      },
+      { id:"w1s4", tag:"bit", title:"Bit manipulation essentials", est:45, diff:"easy",
+        videos:[
+          {t:"Number of 1 Bits — LeetCode 191 (NeetCode)", u:"https://www.youtube.com/watch?v=5Km3utixwZs"},
+          {t:"Sum of Two Integers — LeetCode 371 (NeetCode)", u:"https://www.youtube.com/watch?v=qq64FrA2UXQ"}
+        ],
+        practice:[
+          {t:"LeetCode 191. Number of 1 Bits", u:LINK_BUILDER.LC("number-of-1-bits")},
+          {t:"LeetCode 371. Sum of Two Integers", u:LINK_BUILDER.LC("sum-of-two-integers")}
+        ]
+      }
+    ]},
+
+  { id:"w2", title:"Week 2 — Two Pointers, Sliding Window, Binary Search", days:"Mon–Sat study",
+    steps:[
+      { id:"w2s1", tag:"twopointers", title:"3Sum, Container With Most Water, Trapping Rain Water", est:75, diff:"medium",
+        videos:[
+          {t:"Two Pointers (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=sS_PzPz7Hho"}, // Added introductory video
+          {t:"3Sum — LeetCode 15 (NeetCode)", u:"https://www.youtube.com/watch?v=jzZsG8n2R9A"},
+          {t:"Container With Most Water — LeetCode 11 (NeetCode)", u:"https://www.youtube.com/watch?v=UuiTKBwPgAo"},
+          {t:"Trapping Rain Water — LeetCode 42 (NeetCode)", u:"https://www.youtube.com/watch?v=ZI2z5pq0TqA"}
+        ],
+        practice:[
+          {t:"LeetCode 15. 3Sum", u:LINK_BUILDER.LC("3sum")},
+          {t:"LeetCode 11. Container With Most Water", u:LINK_BUILDER.LC("container-with-most-water")},
+          {t:"LeetCode 42. Trapping Rain Water", u:LINK_BUILDER.LC("trapping-rain-water")}
+        ]
+      },
+      { id:"w2s2", tag:"sliding", title:"Minimum Window Substring & classic variants", est:60, diff:"hard",
+        videos:[
+          {t:"Sliding Window (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=gqXIR1e_8Kk"}, // Added introductory video
+          {t:"Minimum Window Substring — LeetCode 76 (NeetCode)", u:"https://www.youtube.com/watch?v=jSto0O4AJbM"}
+        ],
+        practice:[
+          {t:"LeetCode 76. Minimum Window Substring", u:LINK_BUILDER.LC("minimum-window-substring")},
+          {t:"LeetCode 567. Permutation in String", u:LINK_BUILDER.LC("permutation-in-string")},
+          {t:"LeetCode 424. Longest Repeating Character Replacement", u:LINK_BUILDER.LC("longest-repeating-character-replacement")}
+        ]
+      },
+      { id:"w2s3", tag:"binarysearch", title:"Binary search patterns & search on answer", est:55, diff:"medium",
+        videos:[
+          {t:"Binary Search in 4 minutes", u:"https://www.youtube.com/watch?v=xqDmZmmHF5E"},
+          {t:"Search in Rotated Sorted Array — 33 (NeetCode)", u:"https://www.youtube.com/watch?v=U8XENwh8Oy8"},
+          {t:"Koko Eating Bananas — 875 (NeetCode)", u:"https://www.youtube.com/watch?v=U2SozAs9RzA"}
+        ],
+        practice:[
+          {t:"LeetCode 33. Rotated Sorted Array", u:LINK_BUILDER.LC("search-in-rotated-sorted-array")},
+          {t:"LeetCode 875. Koko Eating Bananas", u:LINK_BUILDER.LC("koko-eating-bananas")},
+          {t:"LeetCode 74. Search a 2D Matrix", u:LINK_BUILDER.LC("search-a-2d-matrix")}
+        ]
+      }
+    ]},
+
+  { id:"w3", title:"Week 3 — Stack/Queue, Monotonic, Prefix", days:"Mon–Sat study",
+    steps:[
+      { id:"w3s1", tag:"stackqueue", title:"Valid Parentheses + Min Stack", est:45, diff:"easy",
+        videos:[
+          {t:"Stacks & Queues (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=rKqvJ4T1k2c"}, // Added introductory video
+          {t:"Valid Parentheses — 20 (NeetCode)", u:"https://www.youtube.com/watch?v=WTzjTskDFMg"},
+          {t:"Min Stack — 155 (video)", u:"https://www.youtube.com/watch?v=EhCiNho80HI"}
+        ],
+        practice:[
+          {t:"LeetCode 20. Valid Parentheses", u:LINK_BUILDER.LC("valid-parentheses")},
+          {t:"LeetCode 155. Min Stack", u:LINK_BUILDER.LC("min-stack")}
+        ]
+      },
+      { id:"w3s2", tag:"stackqueue", title:"Queue via Stacks; Stack via Queues", est:40, diff:"easy",
+        videos:[{t:"Implement Queue using Stacks — 232", u:"https://www.youtube.com/watch?v=FEark4VZP5U"}],
+        practice:[
+          {t:"LeetCode 232. Queue using Stacks", u:LINK_BUILDER.LC("implement-queue-using-stacks")},
+          {t:"LeetCode 225. Stack using Queues", u:LINK_BUILDER.LC("implement-stack-using-queues")}
+        ]
+      },
+      { id:"w3s3", tag:"monotonic", title:"Monotonic stack/queue + prefix", est:60, diff:"medium",
+        videos:[
+          {t:"Monotonic Stack (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=NBfXb_g5vL8"}, // Added introductory video
+          {t:"Daily Temperatures — 739 (NeetCode)", u:"https://www.youtube.com/watch?v=cTBiBSnjO3c"},
+          {t:"Subarray Sum Equals K — 560 (NeetCode)", u:"https://www.youtube.com/watch?v=fFVZt-6sgyo"}
+        ],
+        practice:[
+          {t:"LeetCode 739. Daily Temperatures", u:LINK_BUILDER.LC("daily-temperatures")},
+          {t:"LeetCode 560. Subarray Sum Equals K", u:LINK_BUILDER.LC("subarray-sum-equals-k")}
+        ]
+      }
+    ]},
+
+  { id:"w4", title:"Week 4 — Trees/BST + Backtracking", days:"Mon–Sat study",
+    steps:[
+      { id:"w4s1", tag:"trees", title:"Tree traversal patterns (BFS/DFS) & depth", est:55, diff:"easy",
+        videos:[
+          {t:"Trees (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=f2n_yS8opX4"}, // Added introductory video
+          {t:"Level Order Traversal — 102 (NeetCode)", u:"https://www.youtube.com/watch?v=6ZnyEApgFYg"}
+        ],
+        practice:[
+          {t:"LeetCode 102. Level Order Traversal", u:LINK_BUILDER.LC("binary-tree-level-order-traversal")},
+          {t:"LeetCode 104. Maximum Depth", u:LINK_BUILDER.LC("maximum-depth-of-binary-tree")}
+        ]
+      },
+      { id:"w4s2", tag:"trees", title:"BST basics: Validate, Kth Smallest, LCA", est:60, diff:"medium",
+        videos:[
+          {t:"Validate BST — 98 (NeetCode)", u:"https://www.youtube.com/watch?v=s6ATEkipzow"},
+          {t:"Kth Smallest BST — 230 (NeetCode)", u:"https://www.youtube.com/watch?v=5LUXSvjmGCw"},
+          {t:"LCA of BST — 235 (NeetCode)", u:"https://www.youtube.com/watch?v=gs2LMfuOR9k"}
+        ],
+        practice:[
+          {t:"LeetCode 98. Validate BST", u:LINK_BUILDER.LC("validate-binary-search-tree")},
+          {t:"LeetCode 230. Kth Smallest", u:LINK_BUILDER.LC("kth-smallest-element-in-a-bst")},
+          {t:"LeetCode 235. LCA BST", u:LINK_BUILDER.LC("lowest-common-ancestor-of-a-binary-search-tree")}
+        ]
+      },
+      { id:"w4s3", tag:"backtracking", title:"Backtracking: Subsets, Permutations, Combination Sum", est:70, diff:"medium",
+        videos:[
+          {t:"Backtracking (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=n7bE_eLXYEE"}, // Added introductory video
+          {t:"Subsets — 78 (NeetCode)", u:"https://www.youtube.com/watch?v=REOH22Xwdkk"},
+          {t:"Permutations — 46 (NeetCode)", u:"https://www.youtube.com/watch?v=s7AvT7cGdSo"},
+          {t:"Combination Sum — 39 (NeetCode)", u:"https://www.youtube.com/watch?v=GBKI9VSKdGg"}
+        ],
+        practice:[
+          {t:"LeetCode 78. Subsets", u:LINK_BUILDER.LC("subsets")},
+          {t:"LeetCode 46. Permutations", u:LINK_BUILDER.LC("permutations")},
+          {t:"LeetCode 39. Combination Sum", u:LINK_BUILDER.LC("combination-sum")}
+        ]
+      }
+    ]},
+
+  { id:"w5", title:"Week 5 — Heaps/PQ, Sorting, Intervals/Greedy", days:"Mon–Sat study",
+    steps:[
+      { id:"w5s1", tag:"heap", title:"Priority Queue & Top-K patterns", est:60, diff:"medium",
+        videos:[
+          {t:"Priority Queue — introduction (William Fiset)", u:"https://www.youtube.com/watch?v=D6gu-_tmEpQ"},
+          {t:"Binary Heap — deep dive (Fiset)", u:"https://www.youtube.com/watch?v=Q_eia3jC9Ts"},
+          {t:"Kth Largest — 215 (NeetCode)", u:"https://www.youtube.com/watch?v=XEmy13g1Qxc"}
+        ],
+        practice:[
+          {t:"LeetCode 215. Kth Largest in Array", u:LINK_BUILDER.LC("kth-largest-element-in-an-array")},
+          {t:"LeetCode 347. Top K Frequent Elements", u:LINK_BUILDER.LC("top-k-frequent-elements")}
+        ]
+      },
+      { id:"w5s2", tag:"sorting", title:"Divide & Conquer sorting: MergeSort, QuickSort", est:50, diff:"easy",
+        videos:[
+          {t:"Merge Sort — Abdul Bari", u:"https://www.youtube.com/watch?v=mB5HXBb_HY8"},
+          {t:"QuickSort — Abdul Bari", u:"https://www.youtube.com/watch?v=7h1s2SojIRw"}
+        ],
+        practice:[{t:"Implement mergesort/quicksort (scratch)", u:"https://gist.github.com/"}]
+      },
+      { id:"w5s3", tag:"intervals", title:"Intervals & greedy scheduling", est:60, diff:"medium",
+        videos:[
+          {t:"Intervals (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=qK_y_E6jK1I"}, // Added introductory video
+          {t:"Greedy Algorithms (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=FjIAdyB6N8Q"}, // Added introductory video
+          {t:"Merge Intervals — 56 (NeetCode)", u:"https://www.youtube.com/watch?v=44H3cEC2fFM"},
+          {t:"Non-overlapping Intervals — 435 (NeetCode)", u:"https://www.youtube.com/watch?v=nONCGxWoUfM"},
+          {t:"Meeting Rooms II — 253 (NeetCode)", u:"https://www.youtube.com/watch?v=FdzJmTCVyJU"}
+        ],
+        practice:[
+          {t:"LeetCode 56. Merge Intervals", u:LINK_BUILDER.LC("merge-intervals")},
+          {t:"LeetCode 435. Non-overlapping Intervals", u:LINK_BUILDER.LC("non-overlapping-intervals")},
+          /* FIX: Meeting Rooms II is Premium; use free equivalents */
+          {t:"LeetCode 57. Insert Interval (free alt)", u:LINK_BUILDER.LC("insert-interval")},
+          {t:"LeetCode 452. Minimum Number of Arrows to Burst Balloons (free alt)", u:LINK_BUILDER.LC("minimum-number-of-arrows-to-burst-balloons")}
+        ]
+      },
+      { id:"w5s4", tag:"advanced", title:"LRU Cache (design + hash map + DLL)", est:40, diff:"medium",
+        videos:[{t:"LRU Cache — 146 (NeetCode)", u:"https://www.youtube.com/watch?v=7ABFKPK2hD4"}],
+        practice:[{t:"LeetCode 146. LRU Cache", u:LINK_BUILDER.LC("lru-cache")}]
+      }
+    ]},
+
+  { id:"w6", title:"Week 6 — Graphs I: BFS/DFS, Grids, Topological Sort", days:"Mon–Sat study",
+    steps:[
+      { id:"w6s1", tag:"graphs", title:"BFS & DFS fundamentals; Clone Graph", est:55, diff:"medium",
+        videos:[
+          {t:"Graphs (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=tWVWeAqZ0Wg"}, // Added introductory video
+          {t:"Breadth-First Search — Fiset", u:"https://www.youtube.com/watch?v=xlVX7dXLS64"},
+          {t:"Depth-First Search — Fiset", u:"https://www.youtube.com/watch?v=7fujbpJ0LB4"},
+          {t:"Clone Graph — 133 (NeetCode)", u:"https://www.youtube.com/watch?v=mQeF6bN8hMk"}
+        ],
+        practice:[{t:"LeetCode 133. Clone Graph", u:LINK_BUILDER.LC("clone-graph")}]
+      },
+      { id:"w6s2", tag:"graphs", title:"Grid BFS: Islands, (Premium alt) → 01 Matrix, Rotting Oranges", est:60, diff:"medium",
+        videos:[
+          {t:"Number of Islands — 200 (NeetCode)", u:"https://www.youtube.com/watch?v=pV2kpPD66nE"},
+          {t:"Walls & Gates — 286 (NeetCode, Premium problem)", u:"https://www.youtube.com/watch?v=e69C6xhiSQE"},
+          {t:"Rotting Oranges — 994 (NeetCode)", u:"https://www.youtube.com/watch?v=y704fEOx0s0"}
+        ],
+        practice:[
+          {t:"LeetCode 200. Number of Islands", u:LINK_BUILDER.LC("number-of-islands")},
+          /* FIX: replace premium Walls & Gates with free 01 Matrix */
+          {t:"LeetCode 542. 01 Matrix (free replacement)", u:LINK_BUILDER.LC("01-matrix")},
+          {t:"LeetCode 994. Rotting Oranges", u:LINK_BUILDER.LC("rotting-oranges")}
+        ]
+      },
+      { id:"w6s3", tag:"toposort", title:"Topological order (Kahn & DFS) + Course Schedule I/II", est:60, diff:"medium",
+        videos:[
+          {t:"Topological Sort (Kahn) — Fiset", u:"https://www.youtube.com/watch?v=cIBFEhD77b4"},
+          {t:"Course Schedule — 207 (NeetCode)", u:"https://www.youtube.com/watch?v=EgI5nU9etnU"},
+          {t:"Course Schedule II — 210 (NeetCode)", u:"https://www.youtube.com/watch?v=Akt3glAwyfY"}
+        ],
+        practice:[
+          {t:"LeetCode 207. Course Schedule", u:LINK_BUILDER.LC("course-schedule")},
+          {t:"LeetCode 210. Course Schedule II", u:LINK_BUILDER.LC("course-schedule-ii")},
+          {t:"CSES: Course Schedule (Topo)", u:"https://cses.fi/problemset/task/1679"}
+        ]
+      }
+    ]},
+
+  { id:"w7", title:"Week 7 — Graphs II: Shortest Paths, DSU, MST", days:"Mon–Sat study",
+    steps:[
+      { id:"w7s1", tag:"shortest", title:"Dijkstra, Bellman-Ford, Floyd-Warshall", est:70, diff:"medium",
+        videos:[
+          {t:"Dijkstra — Fiset", u:"https://www.youtube.com/watch?v=pSqmAO-m7Lk"},
+          {t:"Bellman-Ford — Fiset", u:"https://www.youtube.com/watch?v=obWXjtg0L64"},
+          {t:"Floyd-Warshall — Fiset", u:"https://www.youtube.com/watch?v=4OQeCuLYj-4"}
+        ],
+        practice:[
+          {t:"CSES: Shortest Routes I", u:"https://cses.fi/problemset/task/1671"},
+          {t:"LeetCode 743. Network Delay Time", u:LINK_BUILDER.LC("network-delay-time")}
+        ]
+      },
+      { id:"w7s2", tag:"dsu", title:"Union-Find, Kruskal, Prim, Valid Tree", est:65, diff:"medium",
+        videos:[
+          {t:"Union-Find / DSU — Fiset", u:"https://www.youtube.com/watch?v=VHRhJWacxis"},
+          {t:"Kruskal’s MST — Fiset", u:"https://www.youtube.com/watch?v=JZBQLXgSGfs"},
+          {t:"Prim’s MST — Fiset", u:"https://www.youtube.com/watch?v=jsmMtJpPnhU"}
+        ],
+        practice:[
+          {t:"LeetCode 261. Graph Valid Tree", u:"https://leetcode.com/problems/graph-valid-tree/"},
+          {t:"LeetCode 1584. Min Cost to Connect All Points", u:LINK_BUILDER.LC("min-cost-to-connect-all-points")}
+        ]
+      }
+    ]},
+
+  { id:"w8", title:"Week 8 — Dynamic Programming I/II + String/Trie (stretch)", days:"Mon–Sat study",
+    steps:[
+      { id:"w8s1", tag:"dp", title:"1-D DP: Climbing Stairs, House Robber, Coin Change", est:70, diff:"easy",
+        videos:[
+          {t:"Dynamic Programming (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=oBt53YbR9Kk"}, // Added introductory video
+          {t:"Climbing Stairs — 70 (NeetCode)", u:"https://www.youtube.com/watch?v=Y0lT9Fck7qI"},
+          {t:"Coin Change — 322 (NeetCode)", u:"https://www.youtube.com/watch?v=H9bfqozjoqs"},
+          {t:"House Robber II — 213 (NeetCode)", u:"https://www.youtube.com/watch?v=rWAJCfYYOvM"}
+        ],
+        practice:[
+          {t:"LeetCode 70. Climbing Stairs", u:LINK_BUILDER.LC("climbing-stairs")},
+          {t:"LeetCode 198. House Robber", u:LINK_BUILDER.LC("house-robber")},
+          {t:"LeetCode 322. Coin Change", u:LINK_BUILDER.LC("coin-change")}
+        ]
+      },
+      { id:"w8s2", tag:"dp", title:"Sequence & interval DP: LIS, Word Break, Palindromes", est:75, diff:"medium",
+        videos:[
+          {t:"LIS (n log n) — Tushar Roy", u:"https://www.youtube.com/watch?v=CE2b_-XfVDk"},
+          {t:"Word Break — 139 (NeetCode)", u:"https://www.youtube.com/watch?v=Sx9NNgInc3A"},
+          {t:"Longest Palindromic Substring — 5 (NeetCode)", u:"https://www.youtube.com/watch?v=XYQecbcd6_c"}
+        ],
+        practice:[
+          {t:"LeetCode 300. LIS", u:LINK_BUILDER.LC("longest-increasing-subsequence")},
+          {t:"LeetCode 139. Word Break", u:LINK_BUILDER.LC("word-break")},
+          {t:"LeetCode 5. Longest Palindromic Substring", u:LINK_BUILDER.LC("longest-palindromic-substring")}
+        ]
+      },
+      { id:"w8s3", tag:"stringalgs", title:"Edit Distance + KMP (string DP/linear match)", est:70, diff:"hard",
+        videos:[
+          {t:"Edit Distance — Tushar Roy", u:"https://www.youtube.com/watch?v=We3YDTzNXEk"},
+          {t:"KMP (prefix function) — Tushar Roy", u:"https://www.youtube.com/watch?v=BXCEFAzhxGY"}
+        ],
+        practice:[
+          {t:"LeetCode 72. Edit Distance", u:LINK_BUILDER.LC("edit-distance")},
+          {t:"LeetCode 28. First Occurrence in String", u:LINK_BUILDER.LC("find-the-index-of-the-first-occurrence-in-a-string")}
+        ]
+      },
+      { id:"w8s4", tag:"trie", title:"Trie & (opt) Segment/Fenwick Trees", est:60, diff:"mix",
+        videos:[
+          {t:"Tries (Intro) — NeetCode", u:"https://www.youtube.com/watch?v=zgd5R1M6dJ0"}, // Added introductory video
+          {t:"Implement Trie — 208 (NeetCode)", u:"https://www.youtube.com/watch?v=oobqoCJlHA0"},
+          {t:"Segment Tree — Fiset", u:"https://www.youtube.com/watch?v=ZBHKZF5w4YU"},
+          {t:"Fenwick (Binary Indexed) Tree — Fiset", u:"https://www.youtube.com/watch?v=dp-gWnYzjQI"}
+        ],
+        practice:[
+          {t:"LeetCode 208. Implement Trie", u:LINK_BUILDER.LC("implement-trie-prefix-tree")},
+          {t:"CSES Range Queries (pick any 2)", u:LINK_BUILDER.CSES}
+        ]
+      },
+      { id:"w8s5", tag:"dp", title:"Subset DP: Partition Equal Subset Sum", est:35, diff:"medium",
+        videos:[{t:"Partition Equal Subset Sum — 416 (NeetCode)", u:"https://www.youtube.com/watch?v=IsvocB5BJhw"}],
+        practice:[{t:"LeetCode 416. Partition Equal Subset Sum", u:LINK_BUILDER.LC("partition-equal-subset-sum")}]
+      },
+      { id:"w8s6", tag:"trees", title:"Tree DP: Diameter & Maximum Path Sum", est:55, diff:"medium",
+        videos:[
+          {t:"Diameter of Binary Tree — 543 (NeetCode)", u:"https://www.youtube.com/watch?v=bkxqA8Rfv04"},
+          {t:"Binary Tree Maximum Path Sum — 124 (NeetCode)", u:"https://www.youtube.com/watch?v=Hr5cWUld4vU"}
+        ],
+        practice:[
+          {t:"LeetCode 543. Diameter of Binary Tree", u:LINK_BUILDER.LC("diameter-of-binary-tree")},
+          {t:"LeetCode 124. Binary Tree Maximum Path Sum", u:LINK_BUILDER.LC("binary-tree-maximum-path-sum")}
+        ]
+      }
+    ]}
+];
+
+/* ---------- State ---------- */
+const keyProgress="dsa-pro-v1";
+const keyTheme="dsa-pro-theme";
+const keyStreak="dsa-pro-streak";
+const keyPlan="dsa-pro-calendar";
+
+let done = JSON.parse(localStorage.getItem(keyProgress)||"{}");
+let theme = localStorage.getItem(keyTheme)||"dark";
+let streak = JSON.parse(localStorage.getItem(keyStreak)||"{\"days\":0,\"last\":\"\"}");
+let planner = JSON.parse(localStorage.getItem(keyPlan)||"{}");
+let currentWeek = PLAN[0].id;
+
+/* ---------- Elements ---------- */
+const weekList = document.getElementById("weekList");
+const stepsEl = document.getElementById("steps");
+const weekTitle = document.getElementById("weekTitle");
+const overallPct = document.getElementById("overallPct");
+const overallBar = document.getElementById("overallBar");
+const q = document.getElementById("q");
+const topic = document.getElementById("topic");
+const difficulty = document.getElementById("difficulty");
+const expandAll = document.getElementById("expandAll");
+const collapseAll = document.getElementById("collapseAll");
+const themeToggle = document.getElementById("themeToggle");
+const openNext = document.getElementById("openNext");
+const resetBtn = document.getElementById("reset");
+const exportBtn = document.getElementById("exportBtn");
+const importBtn = document.getElementById("importBtn");
+const importFile = document.getElementById("importFile");
+const streakBadge = document.getElementById("streakBadge");
+const startDate = document.getElementById("startDate");
+const hours = document.getElementById("hours");
+const makePlan = document.getElementById("makePlan");
+const planOut = document.getElementById("planOut");
+
+/* ---------- Helpers ---------- */
+function save(){ localStorage.setItem(keyProgress, JSON.stringify(done)); updateProgress(); trackStreakIfAny(); }
+function setTheme(t){ document.getElementById("app").setAttribute("data-theme",t); localStorage.setItem(keyTheme,t); }
+function itemIds(){ return PLAN.flatMap(w=>w.steps.map(s=>s.id)); }
+function isChecked(id){ return !!done[id]; }
+function toggle(id){ done[id] = !done[id]; save(); renderWeeks(); renderSteps(); }
+function fmtDate(d){ return d.toISOString().slice(0,10); }
+function deb(fn,ms=200){ let h; return (...a)=>{ clearTimeout(h); h=setTimeout(()=>fn(...a),ms); } }
+
+/* ---------- Rendering ---------- */
+function renderWeeks(){
+  weekList.innerHTML="";
+  PLAN.forEach(w=>{
+    const total=w.steps.length;
+    const d=w.steps.filter(s=>isChecked(s.id)).length;
+    const pct=Math.round(100*d/total);
+    const div=document.createElement("div");
+    div.className="week-card"+(currentWeek===w.id?" active":"");
+    div.innerHTML=`
+      <div class="row" style="justify-content:space-between">
+        <div>
+          <div style="font-weight:700">${w.title}</div>
+          <div class="meta">${w.days}</div>
+        </div>
+        <div class="badge">${d}/${total}</div>
+      </div>
+      <div class="progress-sm"><div class="bar" style="width:${pct}%"></div></div>
+    `;
+    div.onclick=()=>{ currentWeek=w.id; renderWeeks(); renderSteps(); };
+    weekList.appendChild(div);
+  });
+}
+function matchesFilters(step, wTitle){
+  const text = (step.title+" "+wTitle+" "+(step.videos||[]).map(v=>v.t).join(" ")+" "+(step.practice||[]).map(p=>p.t).join(" ")).toLowerCase();
+  const qok=!q.value || text.includes(q.value.toLowerCase());
+  const tok = topic.value==="all" || step.tag===topic.value || wTitle.toLowerCase().includes(topic.value);
+  const dok = difficulty.value==="all" || (step.diff||"").toLowerCase()===difficulty.value;
+  return qok && tok && dok;
+}
+function renderSteps(){
+  const W = PLAN.find(w=>w.id===currentWeek);
+  weekTitle.textContent = W.title;
+  stepsEl.innerHTML="";
+  W.steps.forEach(s=>{
+    if(!matchesFilters(s,W.title)) return;
+    const wrap=document.createElement("div");
+    wrap.className="step";
+    wrap.dataset.id=s.id;
+    const tagsHTML = `<span class="chip">${s.tag}</span>` + (s.diff?` <span class="tag">Difficulty: ${s.diff}</span>`:"") + (s.est?` <span class="tag">~${s.est} min</span>`:"");
+    wrap.innerHTML=`
+      <div class="step-head">
+        <div>${tagsHTML}</div>
+        <h4>${s.title}</h4>
+        <div class="meta"></div>
+        <label class="done"><input type="checkbox" ${isChecked(s.id)?"checked":""} aria-label="Mark complete"/> Done</label>
+      </div>
+      <div class="step-body">
+        <div class="grid grid-2">
+          <div>
+            <div class="meta" style="margin-bottom:6px">Watch</div>
+            <div class="links">
+              ${(s.videos||[]).map(v=>(
+                `<a href="${v.u}" target="_blank" rel="noopener">
+                  <div><div>${v.t}</div><small>${new URL(v.u).hostname}</small></div>
+                </a>`
+              )).join("")}
+            </div>
+          </div>
+          <div>
+            <div class="meta" style="margin-bottom:6px">Practice</div>
+            <div class="links">
+              ${(s.practice||[]).map(p=>(
+                `<a href="${p.u}" target="_blank" rel="noopener">
+                  <div><div>${p.t}</div><small>${new URL(p.u).hostname}</small></div>
+                </a>`
+              )).join("")}
+            </div>
+          </div>
+        </div>
+        <div class="tags" style="margin-top:8px">
+          ${(s.tag?`<span class="tag">#${s.tag}</span>`:"")}
+        </div>
+      </div>
+    `;
+    const cb=wrap.querySelector('input[type="checkbox"]');
+    cb.onchange=()=>toggle(s.id);
+    const head=wrap.querySelector('.step-head');
+    const body=wrap.querySelector('.step-body');
+    head.addEventListener("click",(e)=>{ if(e.target===cb) return; body.style.display= body.style.display==='block'?'none':'block'; });
+    stepsEl.appendChild(wrap);
+  });
+}
+function updateProgress(){
+  const all=itemIds();
+  const d=all.filter(isChecked).length;
+  const pct=Math.round(100*d/all.length);
+  overallPct.textContent = pct+"% complete";
+  overallBar.style.width = pct+"%";
+}
+
+/* ---------- Theme, keyboard, expand/collapse ---------- */
+setTheme(theme);
+themeToggle.onclick=()=>{ theme = theme==="dark"?"light":"dark"; setTheme(theme); };
+expandAll.onclick=()=>document.querySelectorAll('.step-body').forEach(b=>b.style.display='block');
+collapseAll.onclick=()=>document.querySelectorAll('.step-body').forEach(b=>b.style.display='none');
+q.oninput=deb(renderSteps,150);
+topic.onchange=renderSteps;
+difficulty.onchange=renderSteps;
+
+document.addEventListener("keydown",(e)=>{
+  if(e.key==="/"){ e.preventDefault(); q.focus(); return; }
+  if(e.key==="n"){ const idx=PLAN.findIndex(w=>w.id===currentWeek); if(idx<PLAN.length-1){ currentWeek=PLAN[idx+1].id; renderWeeks(); renderSteps(); } }
+  if(e.key==="p"){ const idx=PLAN.findIndex(w=>w.id===currentWeek); if(idx>0){ currentWeek=PLAN[idx-1].id; renderWeeks(); renderSteps(); } }
+});
+
+/* ---------- Next unopened item ---------- */
+openNext.onclick=()=>{
+  for(const w of PLAN){
+    for(const s of w.steps){
+      if(matchesFilters(s,w.title) && !isChecked(s.id)){
+        const v = (s.videos||[])[0];
+        if(v) window.open(v.u,"_blank","noopener");
+        currentWeek=w.id; renderWeeks(); renderSteps();
+        return;
+      }
+    }
+  }
+  console.log("All visible steps are complete.");
+};
+
+/* ---------- Reset, import/export ---------- */
+resetBtn.onclick=()=>{ 
+  // Removed window.confirm to avoid issues in sandboxed environments.
+  done={}; save(); renderWeeks(); renderSteps(); 
+};
+exportBtn.onclick=()=>{
+  const blob = new Blob([JSON.stringify(done,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download="dsa_progress.json"; a.click(); URL.revokeObjectURL(a.href);
+};
+importBtn.onclick=()=>importFile.click();
+importFile.onchange=async (e)=>{
+  const f=e.target.files[0]; if(!f) return;
+  try{ const text=await f.text(); done=JSON.parse(text); save(); renderWeeks(); renderSteps(); }catch{ console.error("Invalid file."); }
+};
+
+/* ---------- Streak tracking ---------- */
+function trackStreakIfAny(){
+  const today=fmtDate(new Date());
+  if(Object.values(done).some(Boolean)){
+    if(streak.last!==today){
+      const prev=new Date(streak.last||today); const diff=(new Date(today)-prev)/(1000*3600*24);
+      streak.days = streak.last? (diff===1?streak.days+1: (diff>1?1:streak.days)) : 1;
+      streak.last=today;
+      localStorage.setItem(keyStreak, JSON.stringify(streak));
+      streakBadge.textContent = `Streak: ${streak.days}`;
+    }
+  }
+}
+streakBadge.textContent = `Streak: ${streak.days}`;
+
+/* ---------- Simple day-by-day planner ---------- */
+function fmt(d){ return d.toISOString().slice(0,10); }
+makePlan.onclick=()=>{
+  if(!startDate.value){ console.error("Choose a start date."); return; }
+  const perDay = Math.max(0.5, Math.min(6, parseFloat(hours.value)||2));
+  const allSteps = PLAN.flatMap(w=>w.steps.map(s=>({w:w.title, id:s.id, title:s.title, est:s.est||45})));
+  let day = new Date(startDate.value);
+  let remaining = perDay*60; let schedule=[]; let dayItems=[];
+  for(const s of allSteps){
+    if(remaining < 30){
+      schedule.push({date:fmt(day), items:dayItems}); 
+      day = new Date(day.getTime()+24*3600*1000);
+      if(schedule.length%7===6){ schedule.push({date:fmt(day), items:["Review / rest / contest"]}); day=new Date(day.getTime()+24*3600*1000); }
+      dayItems=[]; remaining = perDay*60;
+    }
+    dayItems.push(`${s.title}`);
+    remaining -= (s.est||45);
+  }
+  if(dayItems.length) schedule.push({date:fmt(day), items:dayItems});
+  planner={start:startDate.value,hours:perDay,schedule}; localStorage.setItem(keyPlan, JSON.stringify(planner));
+  planOut.textContent = `Planned ${schedule.length} study days starting ${planner.start}.`;
+};
+
+/* ---------- Boot ---------- */
+renderWeeks(); renderSteps(); updateProgress();
 </script>
 </body>
 </html>
+
